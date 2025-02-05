@@ -5,6 +5,11 @@ const participantes = [
         realizadas: 0,
     },
     {
+        nombre: "Patricia",
+        correctas: 0,
+        realizadas: 0,
+    },
+    {
         nombre: "Andrés",
         correctas: 0,
         realizadas: 0,
