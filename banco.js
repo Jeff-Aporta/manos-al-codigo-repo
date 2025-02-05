@@ -1,6 +1,6 @@
 const base_preguntas = [
     {
-        "Pregunta": "¿Cuál es la forma correcta de definir una variable en CSS?",
+        "Pregunta": "¿Cuál es la forma correcta de llamar una variable en CSS?",
         "Respuesta Correcta": "var(--nombre)",
         "Incorrecta 1": "$nombre",
         "Incorrecta 2": "@nombre",
