@@ -1,9 +1,9 @@
 const participantes = [
-    {
-        nombre: "Carolina",
-        correctas: 0,
-        realizadas: 0,
-    },
+    // {
+    //     nombre: "Carolina",
+    //     correctas: 0,
+    //     realizadas: 0,
+    // },
     {
         nombre: "Patricia",
         correctas: 0,
