@@ -1,0 +1,165 @@
+:root {
+  --te-toca: Lavender;
+  --no-te-toca: rgba(211, 211, 211, 0.2);
+}
+
+body,
+html {
+  background-color: midnightblue;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.marca {
+  text-decoration: none;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  font-size: 150%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: yellowgreen;
+
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 30px;
+
+  transition: filter 0.3s;
+
+  &:hover{
+    filter: brightness(1.5);
+  }
+
+  img {
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid yellowgreen;
+  }
+}
+
+.msg{
+  color: white;
+  animation: titilar 0.3s alternate infinite;
+}
+
+@keyframes titilar {
+  from{
+    filter: opacity(1);
+  }
+  to{
+    filter: opacity(0.1);
+  }
+}
+
+.turno-h1 {
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.app {
+  min-width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  .pregunta,
+  .opciones > .renglon-opn > div {
+    background-color: white;
+    width: 95%;
+    padding: 13px 20px;
+    border-radius: 15px;
+  }
+
+  .pregunta {
+    min-width: 400px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: bolder;
+
+    .index-opn {
+      background: white;
+      padding: 15px;
+      border-radius: 50%;
+      aspect-ratio: 1;
+      width: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & > .renglon-opn > div {
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      &:hover {
+        filter: brightness(0.9);
+      }
+    }
+  }
+}
+
+.renglon-opn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  .index-opn {
+    pointer-events: none;
+    background: plum !important;
+  }
+}
+
+.participante {
+  background: var(--bg);
+  padding: 15px 10px;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.progress-container {
+  display: flex;
+  gap: 15px;
+}
+
+progress {
+  width: 150px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ddd;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(0deg, green, #4caf50, #8bc34a, lightgreen);
+  border-radius: 10px;
+}
+
+progress::-moz-progress-bar {
+  background: linear-gradient(0deg, green, #4caf50, #8bc34a, lightgreen);
+  border-radius: 10px;
+}
