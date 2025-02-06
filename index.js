@@ -1,9 +1,9 @@
 const participantes = [
-    // {
-    //     nombre: "Carolina",
-    //     correctas: 0,
-    //     realizadas: 0,
-    // },
+     {
+         nombre: "Carolina",
+         correctas: 0,
+         realizadas: 0,
+     },
     {
         nombre: "Patricia",
         correctas: 0,
@@ -164,7 +164,7 @@ function cargarPregunta() {
         "Incorrecta 4": Incorrecta4
     } = base_preguntas[index];
 
-    document.querySelector(`.pregunta`).innerHTML = Pregunta;
+    document.querySelector(`.pregunta`).innerHTML = Pregunta.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
     for (let i = 0; i < 5; i++) {
         const bo = document.querySelector(`.opn-${i}`);

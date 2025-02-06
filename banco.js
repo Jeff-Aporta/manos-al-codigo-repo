@@ -1,5 +1,13 @@
 const base_preguntas = [
     {
+        "Pregunta": "¿Cómo seleccionas todos los elementos <p> dentro de un <div>?",
+        "Respuesta Correcta": "div p",
+        "Incorrecta 1": "div > p",
+        "Incorrecta 2": "div + p",
+        "Incorrecta 3": "div, p",
+        "Incorrecta 4": "p div"
+    },
+    {
         "Pregunta": "¿Cuál es la forma correcta de llamar una variable en CSS?",
         "Respuesta Correcta": "var(--nombre)",
         "Incorrecta 1": "$nombre",
@@ -47,14 +55,7 @@ const base_preguntas = [
         "Incorrecta 3": "size-font",
         "Incorrecta 4": "font-weight"
     },
-    {
-        "Pregunta": "¿Cómo seleccionas todos los elementos <p> dentro de un <div>?",
-        "Respuesta Correcta": "div p",
-        "Incorrecta 1": "div > p",
-        "Incorrecta 2": "div + p",
-        "Incorrecta 3": "div, p",
-        "Incorrecta 4": "p div"
-    },
+    
     {
         "Pregunta": "¿Cuál de estos NO es un valor válido para 'position' en CSS?",
         "Respuesta Correcta": "inside",
