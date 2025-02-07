@@ -22,6 +22,7 @@ const participantes = nombresArray.map((e) => ({
 let index = 0;
 let wait = false;
 let btn;
+let momentoCargarPregunta;
 
 /* while (base_preguntas.length > 2) {
     base_preguntas.pop();
@@ -91,8 +92,6 @@ function participanteDOMIndex() {
     p,
   };
 }
-
-let momentoCargarPregunta;
 
 function cargarPregunta() {
   document.querySelector(".msg").style.opacity = 0;
@@ -224,7 +223,7 @@ function App() {
                 </span>
                 <div
                   className={`opn-${i} btn`}
-                  onClick={() => responder(`.opn-${i}`)}
+                  onMouseUp={() => responder(`.opn-${i}`)}
                 >
                   ...
                 </div>
