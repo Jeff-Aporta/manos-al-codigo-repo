@@ -37,6 +37,9 @@ function generarURLJugadores() {
 console.log(generarURLJugadores());
 
 function responder(btn_class) {
+  if (Date.now() - momentoCargarPregunta < 1000) {
+    return
+  }
   if (wait || index >= base_preguntas.length) {
     return;
   }
@@ -88,6 +91,8 @@ function participanteDOMIndex() {
     p,
   };
 }
+
+let momentoCargarPregunta;
 
 function cargarPregunta() {
   document.querySelector(".msg").style.opacity = 0;
@@ -167,6 +172,7 @@ function cargarPregunta() {
         }
     `;
   document.querySelector(`.turno`).innerHTML = participantes[p].nombre;
+  momentoCargarPregunta = Date.now();
 }
 
 function App() {
