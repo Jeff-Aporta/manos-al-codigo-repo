@@ -22,7 +22,7 @@ const participantes = nombresArray.map((e) => ({
 let index = 0;
 let wait = false;
 let btn;
-let momentoCargarPregunta;
+let momentoCargarPregunta = Date.now();
 
 /* while (base_preguntas.length > 2) {
     base_preguntas.pop();
