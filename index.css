@@ -71,6 +71,8 @@ body {
   justify-content: space-between;
   gap: 50px;
 
+  max-width: 1200px;
+
   .pregunta,
   .opciones > .renglon-opn > div {
     background-color: white;
