@@ -1,11 +1,14 @@
-let base_preguntas = [...base_preguntas_ev1]
+Object.assign(window, window["MaterialUI"]);
+
+let base_preguntas = [...base_preguntas_ev1];
 
 const params = new URLSearchParams(window.location.search);
 const nombresString = params.get("jugadores") ?? "Usted";
 const theme = params.get("theme");
+const mouseup = params.get("mouseup");
 
 if (theme && theme != "all") {
-  base_preguntas = base_preguntas.filter(e=>e.theme == theme);
+  base_preguntas = base_preguntas.filter((e) => e.theme == theme);
 }
 
 const nombresArray = nombresString.split(",");
@@ -32,48 +35,6 @@ function generarURLJugadores() {
 }
 
 console.log(generarURLJugadores());
-
-{
-  const jugadores = document.querySelector(".jugadores");
-  let str = "";
-  for (let i = 0; i < Object.keys(participantes).length; i++) {
-    str += `
-            <div class="participante participante-${i}">
-                <style class="var">
-                    .participante-${i}{
-                        --bg: transparent;
-                    }
-                </style>
-                <b>${participantes[i].nombre}</b>
-                <br/>
-                <br/>
-                <div class="progress-container">
-                    <span>0/0</span>
-                    <progress value="0" max="1"></progress>
-                </div>
-            </div>
-        `;
-  }
-  jugadores.innerHTML = str;
-}
-
-{
-  const opciones = document.querySelector(".opciones");
-  let str = "";
-  for (let i = 0; i < 5; i++) {
-    str += `
-            <div class="renglon-opn">
-                <span class="index-opn">
-                    ${i + 1}
-                </span>
-                <div class="opn-${i} btn" onclick="responder('.opn-${i}')">
-                    ...
-                </div>
-            </div>
-        `;
-  }
-  opciones.innerHTML = str;
-}
 
 function responder(btn_class) {
   if (wait || index >= base_preguntas.length) {
@@ -116,14 +77,6 @@ function responder(btn_class) {
 
   index++;
 }
-
-document.addEventListener("keyup", function () {
-  if (wait) {
-    cargarPregunta();
-    wait = false;
-    btn.style.background = null;
-  }
-});
 
 let Respuesta_Correcta;
 
@@ -216,4 +169,132 @@ function cargarPregunta() {
   document.querySelector(`.turno`).innerHTML = participantes[p].nombre;
 }
 
+function App() {
+  return (
+    <React.Fragment>
+      <div
+        className={fluidCSS()
+          .ltX(1000, {
+            flexDirection: ["column"],
+            alignItems: ["stretch", "center"],
+          })
+          .end("app")}
+      >
+        <div
+          className={fluidCSS()
+            .ltX(1000, {
+              width: ["100%", "80%"],
+            })
+            .end()}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "15px",
+          }}
+        >
+          <span className="msg" style={{ opacity: 0 }}>
+            Presiona para continuar
+          </span>
+          <Typography
+            variant="h4"
+            component="span"
+            className="turno-h1"
+            style={{
+              display: "inline-block",
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            <span className="turno"></span> responde.
+          </Typography>
+          <Typography variant="h5" component="div" className="pregunta">
+            Cargando....
+          </Typography>
+          <div className="opciones">
+            {Array.from({ length: 5 }, (_, i) => (
+              <div className="renglon-opn">
+                <span className="index-opn">
+                  {["A", "B", "C", "D", "E"][i]}
+                </span>
+                <div
+                  className={`opn-${i} btn`}
+                  onClick={() => responder(`.opn-${i}`)}
+                >
+                  ...
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Separador />
+        <div className="jugadores">
+          {participantes.map((p, i) => {
+            return (
+              <div className={`participante participante-${i}`}>
+                <style className="var">
+                  {JS2CSS.parseCSS({
+                    [`.participante-${i}`]: {
+                      "--bg": "transparent",
+                    },
+                  })}
+                </style>
+                <b>{p.nombre}</b>
+                <br />
+                <br />
+                <div className="progress-container">
+                  <span>0/0</span>
+                  <progress value="0" max="1"></progress>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <Separador />
+        <a
+          href="https://t.me/manos_al_codigo"
+          target="_blank"
+          className={fluidCSS()
+            .ltX(1000, {
+              position: ["static", "fixed"],
+            })
+            .end("marca")}
+        >
+          Manos al código
+          <img src="logo_128x128.png" />
+        </a>
+      </div>
+    </React.Fragment>
+  );
+
+  function Separador() {
+    return <div
+      className={fluidCSS()
+        .gtX(1000, {
+          display: "none",
+        })
+        .btwX([450, 750],{
+          opacity: [1, 0.5, 0.3]
+        })
+        .end()}
+      style={{
+        background: "white",
+        height: "2px",
+      }} />;
+  }
+}
+
+function pressContinue() {
+  if (wait) {
+    cargarPregunta();
+    wait = false;
+    btn.style.background = null;
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+document.addEventListener("keyup", pressContinue);
+if (mouseup != "block") {
+  document.addEventListener("mouseup", pressContinue);
+}
 cargarPregunta();
+fluidCSS.actualizarStyle();

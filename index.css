@@ -12,14 +12,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
-  padding: 20px;
+  min-height: 100vh;
+  padding: 10px 0;
   font-family: Arial, sans-serif;
 }
 
 .marca {
   text-decoration: none;
-  position: fixed;
   right: 10px;
   bottom: 10px;
   font-size: 150%;
@@ -68,22 +67,21 @@ body {
 }
 
 .app {
-  min-width: 80%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  gap: 50px;
 
   .pregunta,
   .opciones > .renglon-opn > div {
     background-color: white;
-    width: 95%;
-    padding: 13px 20px;
+    width: 100%;
+    padding: 13px 5px;
     border-radius: 15px;
+
+    text-align: center;
   }
 
   .pregunta {
-    min-width: 400px;
     min-height: 200px;
     display: flex;
     justify-content: center;
@@ -94,14 +92,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
     font-weight: bolder;
 
     .index-opn {
       background: white;
-      padding: 15px;
       border-radius: 50%;
       aspect-ratio: 1;
-      width: 20px;
+      width: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -121,7 +119,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
 
   .index-opn {
     pointer-events: none;

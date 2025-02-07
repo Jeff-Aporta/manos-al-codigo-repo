@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas | Manos al Código</title>
-    <script src="banco.js"></script>
-    <script src="index.js" defer></script>
-    <link rel="stylesheet" href="index.css">
     <style class="fromjs"></style>
 
 
@@ -17,27 +14,22 @@
     <meta property="og:title" content="Manos al Código | Colectivo en acción" />
     <meta property="og:description" content="Clases gratuitas" />
     <meta property="og:image" content="logo_128x128.png" />
+
+    <script
+        type="text/javascript"
+        src="https://jeff-aporta.github.io/ascii-maploader/static/js/index.all.min.js"
+    ></script>
+    <script>
+        asciiMap.CLI.react_mui_fa();
+        asciiMap.CLI.fluidCSS();
+        asciiMap.CLI.JS2CSS();
+
+        asciiMap.tree().css("index").js("banco").jsx("index").writehtml();
+    </script>
 </head>
 <body>
-    <a class="marca" href="https://t.me/manos_al_codigo" target="_blank">
-        Manos al código
-        <img src="logo_128x128.png">
-    </a>
-    <div class="app">
-        <div class="test">
-            <span class="msg" style="opacity: 0;">Presiona una tecla para continuar</span>
-            <h1 class="turno-h1">
-                <span class="turno"></span> responde.
-            </h1>
-            <h2 class="pregunta">
-                Cargando....
-            </h2>
-            <div class="opciones">
-            </div>
-        </div>
-        <div class="jugadores">
-        </div>
+    <div id="root">
+        Cargando...
     </div>
-    
 </body>
 </html>
