@@ -22,7 +22,7 @@ const participantes = nombresArray.map((e) => ({
 let index = 0;
 let wait = false;
 let btn;
-let momentoCargarPregunta = Date.now()-5000;
+let momentoCargarPregunta;
 
 /* while (base_preguntas.length > 2) {
     base_preguntas.pop();
@@ -38,7 +38,7 @@ function generarURLJugadores() {
 console.log(generarURLJugadores());
 
 function responder(btn_class) {
-  if (Date.now() - momentoCargarPregunta < 1500) {
+  if (index > 0 && Date.now() - momentoCargarPregunta < 1500) {
     return
   }
   if (wait || index >= base_preguntas.length) {
