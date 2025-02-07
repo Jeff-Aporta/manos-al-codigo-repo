@@ -38,12 +38,13 @@ function generarURLJugadores() {
 console.log(generarURLJugadores());
 
 function responder(btn_class) {
-  if (Date.now() - momentoCargarPregunta < 1000) {
+  if (Date.now() - momentoCargarPregunta < 1500) {
     return
   }
   if (wait || index >= base_preguntas.length) {
     return;
   }
+  momentoCargarPregunta = Date.now();
   wait = true;
   document.querySelector(".msg").style.opacity = 1;
   btn = document.querySelector(btn_class);
@@ -223,7 +224,7 @@ function App() {
                 </span>
                 <div
                   className={`opn-${i} btn`}
-                  onMouseUp={() => responder(`.opn-${i}`)}
+                  onClick={() => responder(`.opn-${i}`)}
                 >
                   ...
                 </div>
