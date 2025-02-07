@@ -44,7 +44,6 @@ function responder(btn_class) {
   if (wait || index >= base_preguntas.length) {
     return;
   }
-  momentoCargarPregunta = Date.now();
   wait = true;
   document.querySelector(".msg").style.opacity = 1;
   btn = document.querySelector(btn_class);
@@ -81,6 +80,7 @@ function responder(btn_class) {
     .setAttribute("max", participantes[p].realizadas);
 
   index++;
+  momentoCargarPregunta = Date.now();
 }
 
 let Respuesta_Correcta;
