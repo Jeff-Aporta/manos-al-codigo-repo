@@ -1,8 +1,6 @@
-Object.assign(window, window["MaterialUI"]);
 
 let base_preguntas = [...base_preguntas_ev1];
 
-const params = new URLSearchParams(window.location.search);
 const nombresString = params.get("jugadores") ?? "Usted";
 const theme = params.get("theme");
 const mouseup = params.get("mouseup");

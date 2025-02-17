@@ -1,0 +1,18 @@
+body,
+html {
+  background: white;
+}
+
+.ejercicio {
+  &#ejercicio-10 {
+    .negra {
+      background: black;
+    }
+    .marco {
+      --e: 1.3;
+      background-color: white;
+      border: 5px solid black;
+      overflow: hidden;
+    }
+  }
+}

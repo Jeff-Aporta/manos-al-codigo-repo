@@ -1,0 +1,119 @@
+body,
+html {
+  margin: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  min-height: 100vh; /* Altura mínima: 100% del viewport */
+  min-width: 100vw;
+  font-family: sans-serif, Arial, Helvetica;
+  font-size: 140%;
+  overflow: hidden;
+}
+
+.ejercicio {
+  width: 150px;
+  height: 150px;
+  position: relative; /* Para posicionar absolutamente a sus hijos */
+
+  &.screen{
+    .capa{
+      mix-blend-mode: screen; /* Modo de mezcla para efectos visuales */
+      box-shadow: 0 0 15px var(--fondo);
+    }
+  }
+
+  .capa {
+    --tx: 0;
+    --ty: 0;
+    --e: 1;
+    --e-powsin: 0;
+    --a: 0;
+    position: absolute;
+    width: calc(100% * var(--e));
+    height: calc(100% * var(--e));
+    
+    border-radius: 15px;
+    background: var(--fondo); /* Se usará la variable --fondo para el color */
+
+    transform: translate(var(--tx), var(--ty)) rotate(var(--a)) scale(pow(sin(45deg), var(--e-powsin)));
+
+    &.texto{
+      width: fit-content;
+      height: fit-content;
+
+      &.bolder{
+        font-weight: bolder;
+      }
+    }
+
+    &.circular{
+      border-radius: 50%;
+    }
+
+    &.cuadrada{
+      border-radius: 0;
+    }
+
+    &.mitad-ancho{
+      width: 50%;
+    }
+    &.mitad{
+      --e: 0.5;
+    }
+    &.rotar-45{
+      --a: -45deg;
+    }
+    &.rotar45{
+      --a: 45deg;
+    }
+    &.abajo{
+      bottom: 0;
+    }
+    &.derecha{
+      right: 0;
+    }
+
+    &.centrado-horizontal{
+      left: 50%;
+      --tx: -50%;
+    }
+
+    &.centralizada{
+      --tx: -50%;
+      --ty: -50%;
+    }
+
+    &.centrada{
+      --tx: -50%;
+      --ty: -50%;
+      left: 50%;
+      top: 50%;
+    }
+
+    &.roja, &.verde, &.azul, &.blanca, &.naranja, &.negra{
+      cursor: pointer;
+      &:hover{
+        opacity: 0.7;
+      }
+    }
+
+
+
+    /* Clases para definir diferentes colores */
+    &.roja {
+      --fondo: red;
+    }
+    &.verde {
+      --fondo: lime;
+    }
+    &.azul {
+      --fondo: blue;
+    }
+    &.blanca{
+      --fondo: white;
+    }
+  }
+}

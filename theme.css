@@ -1,0 +1,39 @@
+* {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2d2d2d;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+    border: 1px solid #333;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: #2d2d2d !important;
+  }
+
+  &::-webkit-resizer {
+    background: #2d2d2d !important;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: #555 #2d2d2d;
+}
+
+#contenido {
+  padding: 20px;
+}
+
+.miniatura-youtube {
+  border-radius: 15px;
+}

@@ -1,0 +1,18 @@
+body,
+html {
+  background: black; /* Fondo negro */
+}
+
+.ejercicio {
+  /* Estilos específicos para el ejercicio número 4 */
+  &#ejercicio-1 {
+    .roja{
+      left: -20%;
+      top: 20%;
+    }
+    .azul{
+      left: 20%;
+      top: -20%;
+    }
+  }
+}
