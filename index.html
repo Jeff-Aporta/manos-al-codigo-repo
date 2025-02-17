@@ -20,34 +20,37 @@
     ></script>
     <script>
       const params = new URLSearchParams(window.location.search);
-      const pub = params.get("pub");
-      
+      const pubid = params.get("pub");
+      const pub_estructura = {
+        "desafios-de-diseño-css": {
+          root: "css/position",
+          tree: (root) => {
+          },
+        },
+      };
+      const rootfolder = pub_estructura[pubid].root;
+
       asciiMap.CLI.react_mui_fa();
       asciiMap.CLI.fluidCSS();
       asciiMap.CLI.JS2CSS();
 
-
       const tree = asciiMap.tree().jsx("00-muitheme");
-      if (!pub) {
+      if (!pubid) {
         tree.subDir("trivia", (trivia) => {
           trivia.css("index").js("banco").jsx("../00-muitheme", "index");
         });
       } else {
         asciiMap.CLI.prettier_codemirror();
         asciiMap.CLI.FileSaver_jszip();
-        tree.css("theme", "codemirror-prettier").js("tools").jsx("00-muitheme");
+        tree.css("theme").js("tools").jsx("00-muitheme");
 
         tree.subDir("recurrente", (recurrente) => {
-          recurrente.jsx("codemirror");
+          recurrente.css("codemirror-prettier").jsx("codemirror");
         });
 
-        tree.subDir(pub, (pub) => {
-          switch (pub) {
-            case "desafios-de-diseño-css":
-              pub.css("ejercicios");
-              break;
-          }
-          pub.jsx("index");
+        tree.subDir(rootfolder, (subTree) => {
+          pub_estructura[pubid].tree(subTree);
+          subTree.jsx("index");
         });
       }
       tree.writehtml();

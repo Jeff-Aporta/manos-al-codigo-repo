@@ -1,3 +1,5 @@
+let index_code_mirror = 0;
+
 function Codemirror_fluid(props) {
   const [openDialogDownload, setOpenDialogDownload] = React.useState(false);
 
@@ -13,9 +15,15 @@ function Codemirror_fluid(props) {
   const idR = Math.random().toString(36).replace("0.", "");
 
   let editorHTML, editorCSS, editorJS, editorJSX;
-  let textoHTML, textoCSS, textoJS, textoJSX;
   const printWidth = 60;
   const transformar_columna = 1100;
+
+  const [textoHTML, setTextoHTML] = React.useState(HTML ?? "");
+  const [textoCSS, setTextoCSS] = React.useState(CSS ?? "");
+  const [textoJS, setTextoJS] = React.useState(JS ?? "");
+  const [textoJSX, setTextoJSX] = React.useState(JSX ?? "");
+
+  const ref = React.useRef(null);
 
   let {
     nombre_proyecto,
@@ -24,16 +32,58 @@ function Codemirror_fluid(props) {
     CSS,
     JS,
     JSX,
+    index = -1,
     hideHTML = false,
     hideCSS = false,
     hideJS = false,
     hideJSX = false,
   } = props;
 
-  textoHTML = HTML ?? loadStringsSync(files.HTML) ?? "";
-  textoCSS = CSS ?? loadStringsSync(files.CSS) ?? "";
-  textoJS = JS ?? loadStringsSync(files.JS) ?? "";
-  textoJSX = JSX ?? loadStringsSync(files.JSX) ?? "";
+  React.useEffect(() => {
+    cargarArchivos();
+
+    async function cargarArchivos() {
+      if (index == -1 || index == index_code_mirror) {
+        const _html = await procesarArreglo(files.HTML);
+        const _css = await procesarArreglo(files.CSS);
+        const _js = await procesarArreglo(files.JS);
+        const _jsx = await procesarArreglo(files.JSX);
+        setTextoHTML(_html ?? "");
+        setTextoCSS(_css ?? "");
+        setTextoJS(_js ?? "");
+        setTextoJSX(_jsx ?? "");
+        index_code_mirror++;
+        return;
+      }
+      setTimeout(cargarArchivos, 100);
+    }
+
+    async function procesarArreglo(arr) {
+      let loadText = "";
+      if (!arr) return;
+      if (!Array.isArray(arr)) {
+        arr = [arr];
+      }
+      for (const file of arr) {
+        loadText += await cargar(file);
+      }
+      return loadText;
+
+      async function cargar(ruta) {
+        try {
+          const response = await fetch(ruta);
+          if (!response.ok) {
+            throw new Error(
+              "Error al obtener el archivo: " + response.statusText
+            );
+          }
+          const texto = await response.text();
+          return texto;
+        } catch (error) {}
+        return "";
+      }
+    }
+  }, []);
 
   return <ComponenteRetorno />;
 
@@ -61,6 +111,7 @@ function Codemirror_fluid(props) {
 
     return (
       <div
+        ref={ref}
         className={fluidCSS()
           .gtX(transformar_columna, {
             maxHeight: "400px",
@@ -322,7 +373,7 @@ function Codemirror_fluid(props) {
     );
 
     editorHTML.on("change", function (instancia, objetoCambio) {
-      textoHTML = instancia.getValue();
+      setTextoHTML(instancia.getValue());
     });
     editorHTML.on("keydown", capturarComando);
 
@@ -336,7 +387,7 @@ function Codemirror_fluid(props) {
     );
 
     editorCSS.on("change", function (instancia, objetoCambio) {
-      textoCSS = instancia.getValue();
+      setTextoCSS(instancia.getValue());
     });
     editorCSS.on("keydown", capturarComando);
 
@@ -347,7 +398,7 @@ function Codemirror_fluid(props) {
     });
 
     editorJS.on("change", function (instancia, objetoCambio) {
-      textoJS = instancia.getValue();
+      setTextoJS(instancia.getValue());
     });
     editorJS.on("keydown", capturarComando);
 
@@ -361,7 +412,7 @@ function Codemirror_fluid(props) {
     );
 
     editorJSX.on("change", function (instancia, objetoCambio) {
-      textoJSX = instancia.getValue();
+      setTextoJSX(instancia.getValue());
     });
     editorJSX.on("keydown", capturarComando);
 
@@ -496,20 +547,22 @@ function Codemirror_fluid(props) {
     }
   }
 
-  function ejecutarCodigo() {
-    var contenidoHTML = editorHTML.getValue();
-    var contenidoCSS = editorCSS.getValue();
-    var contenidoJS = editorJS.getValue();
-    var contenidoJSX = editorJSX.getValue();
+  function loadIframeContent() {
     var iframe = document.getElementById(`output-${idR}`);
     var docIframe = iframe.contentDocument || iframe.contentWindow.document;
-    docIframe.open();
-    docIframe.write(`
+    if (!docIframe.body.innerHTML.trim()) {
+      docIframe.open();
+      docIframe.write(`
           <!DOCTYPE html>
           <html lang="es">
           <head>
-            <style>${contenidoCSS}</style>
-    
+            <style>
+              * {
+                transition: all 0.3s ease;
+              }
+            </style>
+            <style id="contenido-css-playground"></style>
+
             <script
               type="text/javascript"
               src="https://jeff-aporta.github.io/ascii-maploader/static/js/index.all.min.js"
@@ -522,19 +575,54 @@ function Codemirror_fluid(props) {
             </script>
           </head>
           <body>
-            ${contenidoHTML}
+            <div id="contenido-html-playground">
+             cargando...
+            </div>
           </body>
-          <script>${contenidoJS}</script>
+          <script id="contenido-js-playground"></script>
+          <script type="text/babel" id="contenido-jsx-playground"></script>
           <script type="text/babel">
             if (typeof window != "undefined" && window["MaterialUI"]) {
               Object.assign(window, window["MaterialUI"]);
             }
-            ${contenidoJSX}
           </script>
           </html>
       `);
-    docIframe.close();
+      docIframe.close();
+    }
+  }
+
+  function ejecutarCodigo() {
+    var contenidoHTML = editorHTML.getValue();
+    var contenidoCSS = editorCSS.getValue();
+    var contenidoJS = editorJS.getValue();
+    var contenidoJSX = editorJSX.getValue();
+    var iframe = document.getElementById(`output-${idR}`);
+    var docIframe = iframe.contentDocument || iframe.contentWindow.document;
+    loadIframeContent();
     formatearCodigo();
+    modContenedor(
+      docIframe.querySelector("#contenido-html-playground"),
+      contenidoHTML
+    );
+    modContenedor(
+      docIframe.querySelector("#contenido-css-playground"),
+      contenidoCSS
+    );
+    modContenedor(
+      docIframe.querySelector("#contenido-js-playground"),
+      contenidoJS
+    );
+    modContenedor(
+      docIframe.querySelector("#contenido-jsx-playground"),
+      contenidoJSX
+    );
+
+    function modContenedor(contenedorHTML, value) {
+      if (contenedorHTML.innerHTML != value) {
+        contenedorHTML.innerHTML = value;
+      }
+    }
   }
 
   // Función para formatear el código usando Prettier
@@ -572,10 +660,10 @@ function Codemirror_fluid(props) {
       editorJS.setValue(jsFormateado);
       editorJSX.setValue(jsxFormateado);
 
-      textoHTML = htmlFormateado;
-      textoCSS = cssFormateado;
-      textoJS = jsFormateado;
-      textoJSX = jsxFormateado;
+      setTextoHTML(htmlFormateado);
+      setTextoCSS(cssFormateado);
+      setTextoJS(jsFormateado);
+      setTextoJSX(jsxFormateado);
     } catch (error) {
       alert("Error al formatear el código: " + error.message);
     }

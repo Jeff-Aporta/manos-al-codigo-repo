@@ -19,3 +19,15 @@ function loadStringsSync(urls) {
     })
     .join("\n\n");
 }
+
+function force_extension(filename, extension) {
+  if (!filename.endsWith("." + extension)) {
+    return filename + "." + extension;
+  }
+  return filename;
+}
+
+function pathjoin(...paths) {
+  const retorno = paths.join("/").replace(/\/+/g, "/");
+  return retorno;
+}
