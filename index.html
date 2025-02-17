@@ -6,26 +6,26 @@
     <title>Manos al Código</title>
     <style class="fromjs"></style>
 
-    <link rel="icon" type="image/png" href="logo_128x128.png" />
-    <link rel="apple-touch-icon" href="logo_128x128.png" />
+    <link rel="icon" type="image/png" href="src/img/logo_128x128.png" />
+    <link rel="apple-touch-icon" href="src/img/logo_128x128.png" />
 
     <meta property="og:site_name" content="Manos al Código" />
     <meta property="og:title" content="Manos al Código | Colectivo en acción" />
     <meta property="og:description" content="Colectivo en acción" />
-    <meta property="og:image" content="logo_128x128.png" />
+    <meta property="og:image" content="src/img/src/img/logo_128x128.png" />
 
     <script
       type="text/javascript"
       src="https://jeff-aporta.github.io/ascii-maploader/static/js/index.all.min.js"
     ></script>
     <script>
+      const params = new URLSearchParams(window.location.search);
+      const pub = params.get("pub");
+      
       asciiMap.CLI.react_mui_fa();
       asciiMap.CLI.fluidCSS();
       asciiMap.CLI.JS2CSS();
 
-      const params = new URLSearchParams(window.location.search);
-
-      const pub = params.get("pub");
 
       const tree = asciiMap.tree().jsx("00-muitheme");
       if (!pub) {
