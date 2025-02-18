@@ -296,6 +296,7 @@ function pressContinue() {
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
+
 document.addEventListener("keyup", pressContinue);
 if (mouseup != "block") {
   document.addEventListener("mouseup", pressContinue);

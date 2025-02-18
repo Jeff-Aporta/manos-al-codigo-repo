@@ -619,7 +619,7 @@ function Codemirror_fluid(props) {
     );
 
     function modContenedor(contenedorHTML, value) {
-      if (contenedorHTML.innerHTML != value) {
+      if (contenedorHTML?.innerHTML != value) {
         contenedorHTML.innerHTML = value;
       }
     }
