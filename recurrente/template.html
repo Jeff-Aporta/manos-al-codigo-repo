@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <style>
+      * {
+        transition: all 0.5s ease;
+        animation: opacityIn 0.5s ease-in forwards;
+        animation-fill-mode: none;
+        .animation_whIn, .capa{
+            animation: whIn 0.5s ease-in forwards;
+            animation-fill-mode: none;
+        }
+      }
+      @keyframes opacityIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes whIn {
+        0% {
+            width: 0%;
+            height: 0%;
+        }
+        100% {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    </style>
+    <style id="contenido-css-playground"></style>
+
+    <script
+      type="text/javascript"
+      src="https://jeff-aporta.github.io/ascii-maploader/static/js/index.all.min.js"
+    ></script>
+
+    <script>
+      asciiMap.CLI.react_mui_fa();
+      asciiMap.CLI.fluidCSS();
+      asciiMap.CLI.JS2CSS();
+    </script>
+  </head>
+  <body>
+    <div id="contenido-html-playground">
+      <div class="lds-dual-ring"></div>
+      <style>
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          min-width: 100vw;
+          overflow: hidden;
+        }
+        .lds-dual-ring,
+        .lds-dual-ring:after {
+          box-sizing: border-box;
+        }
+        .lds-dual-ring {
+          display: inline-block;
+          width: 80px;
+          height: 80px;
+        }
+        .lds-dual-ring:after {
+          content: " ";
+          display: block;
+          width: 64px;
+          height: 64px;
+          margin: 8px;
+          border-radius: 50%;
+          border: 10px solid steelblue;
+          border-color: steelblue transparent steelblue transparent;
+          animation: lds-dual-ring 1.2s linear infinite;
+        }
+        @keyframes lds-dual-ring {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      </style>
+    </div>
+  </body>
+  <script id="contenido-js-playground"></script>
+  <script type="text/babel" id="contenido-jsx-playground"></script>
+  <script type="text/babel">
+    if (typeof window != "undefined" && window["MaterialUI"]) {
+      Object.assign(window, window["MaterialUI"]);
+    }
+  </script>
+</html>

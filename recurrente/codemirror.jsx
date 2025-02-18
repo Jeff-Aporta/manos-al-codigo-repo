@@ -12,16 +12,15 @@ function Codemirror_fluid(props) {
   };
 
   let init = false;
-  const idR = Math.random().toString(36).replace("0.", "");
 
   let editorHTML, editorCSS, editorJS, editorJSX;
   const printWidth = 60;
   const transformar_columna = 1100;
 
-  const [textoHTML, setTextoHTML] = React.useState(HTML ?? "");
-  const [textoCSS, setTextoCSS] = React.useState(CSS ?? "");
-  const [textoJS, setTextoJS] = React.useState(JS ?? "");
-  const [textoJSX, setTextoJSX] = React.useState(JSX ?? "");
+  const textoHTML = React.useRef(HTML ?? "");
+  const textoCSS = React.useRef(CSS ?? "");
+  const textoJS = React.useRef(JS ?? "");
+  const textoJSX = React.useRef(JSX ?? "");
 
   const ref = React.useRef(null);
 
@@ -43,19 +42,21 @@ function Codemirror_fluid(props) {
     cargarArchivos();
 
     async function cargarArchivos() {
-      if (index == -1 || index == index_code_mirror) {
+      if (index != -1 && index <= index_code_mirror) {
         const _html = await procesarArreglo(files.HTML);
         const _css = await procesarArreglo(files.CSS);
         const _js = await procesarArreglo(files.JS);
         const _jsx = await procesarArreglo(files.JSX);
-        setTextoHTML(_html ?? "");
-        setTextoCSS(_css ?? "");
-        setTextoJS(_js ?? "");
-        setTextoJSX(_jsx ?? "");
         index_code_mirror++;
+        textoHTML.current = _html ?? "";
+        textoCSS.current = _css ?? "";
+        textoJS.current = _js ?? "";
+        textoJSX.current = _jsx ?? "";
+        formatearCodigo();
+        ejecutarCodigo();
         return;
       }
-      setTimeout(cargarArchivos, 100);
+      setTimeout(cargarArchivos, 1000);
     }
 
     async function procesarArreglo(arr) {
@@ -100,12 +101,12 @@ function Codemirror_fluid(props) {
     }, []);
 
     React.useLayoutEffect(() => {
+      formatearCodigo();
+      ejecutarCodigo();
       if (init) {
         crearEditores();
-      } else {
-        ejecutarCodigo();
+        return;
       }
-      fluidCSS.actualizarStyle();
       init = true;
     }, [width]);
 
@@ -124,7 +125,8 @@ function Codemirror_fluid(props) {
       >
         <PestañasVerticales />
         <iframe
-          id={`output-${idR}`}
+          src="recurrente/template.html"
+          id={`output`}
           className={fluidCSS()
             .gtX(transformar_columna, {
               width: "35%",
@@ -165,25 +167,25 @@ function Codemirror_fluid(props) {
 
     const editor_html = (
       <div id="editor-html" className={classEditor}>
-        <textarea id={`html-code-${idR}`}>{textoHTML}</textarea>
+        <textarea id={`html-code`}>{textoHTML.current}</textarea>
       </div>
     );
 
     const editor_css = (
       <div id="editor-css" className={classEditor}>
-        <textarea id={`css-code-${idR}`}>{textoCSS}</textarea>
+        <textarea id={`css-code`}>{textoCSS.current}</textarea>
       </div>
     );
 
     const editor_js = (
       <div id="editor-js" className={classEditor}>
-        <textarea id={`js-code-${idR}`}>{textoJS}</textarea>
+        <textarea id={`js-code`}>{textoJS.current}</textarea>
       </div>
     );
 
     const editor_jsx = (
       <div id="editor-jsx" className={classEditor}>
-        <textarea id={`jsx-code-${idR}`}>{textoJSX}</textarea>
+        <textarea id={`jsx-code`}>{textoJSX.current}</textarea>
       </div>
     );
 
@@ -357,14 +359,12 @@ function Codemirror_fluid(props) {
   }
 
   function crearEditores() {
-    const idEditores = [
-      "html-code-" + idR,
-      "css-code-" + idR,
-      "js-code-" + idR,
-      "jsx-code-" + idR,
-    ];
+    const idEditores = ["html-code", "css-code", "js-code", "jsx-code"];
+    if (!ref.current) {
+      return setTimeout(crearEditores, 50);
+    }
     editorHTML = CodeMirror.fromTextArea(
-      document.getElementById(idEditores[0]),
+      ref.current.querySelector("#" + idEditores[0]),
       {
         mode: "htmlmixed",
         lineNumbers: true,
@@ -373,12 +373,12 @@ function Codemirror_fluid(props) {
     );
 
     editorHTML.on("change", function (instancia, objetoCambio) {
-      setTextoHTML(instancia.getValue());
+      textoHTML.current = instancia.getValue();
     });
     editorHTML.on("keydown", capturarComando);
 
     editorCSS = CodeMirror.fromTextArea(
-      document.getElementById(idEditores[1]),
+      ref.current.querySelector("#" + idEditores[1]),
       {
         mode: "text/x-scss",
         lineNumbers: true,
@@ -387,23 +387,26 @@ function Codemirror_fluid(props) {
     );
 
     editorCSS.on("change", function (instancia, objetoCambio) {
-      setTextoCSS(instancia.getValue());
+      textoCSS.current = instancia.getValue();
     });
     editorCSS.on("keydown", capturarComando);
 
-    editorJS = CodeMirror.fromTextArea(document.getElementById(idEditores[2]), {
-      mode: "javascript",
-      lineNumbers: true,
-      theme: asciiMap.CLI.codemirror_theme_name(),
-    });
+    editorJS = CodeMirror.fromTextArea(
+      ref.current.querySelector("#" + idEditores[2]),
+      {
+        mode: "javascript",
+        lineNumbers: true,
+        theme: asciiMap.CLI.codemirror_theme_name(),
+      }
+    );
 
     editorJS.on("change", function (instancia, objetoCambio) {
-      setTextoJS(instancia.getValue());
+      textoJS.current = instancia.getValue();
     });
     editorJS.on("keydown", capturarComando);
 
     editorJSX = CodeMirror.fromTextArea(
-      document.getElementById(idEditores[3]),
+      ref.current.querySelector("#" + idEditores[3]),
       {
         mode: "javascript",
         lineNumbers: true,
@@ -412,7 +415,7 @@ function Codemirror_fluid(props) {
     );
 
     editorJSX.on("change", function (instancia, objetoCambio) {
-      setTextoJSX(instancia.getValue());
+      textoJSX.current = instancia.getValue();
     });
     editorJSX.on("keydown", capturarComando);
 
@@ -494,7 +497,7 @@ function Codemirror_fluid(props) {
                         }
                       </head>
                       <body>
-                        ${textoHTML}
+                        ${textoHTML.current}
                       </body>
                     </html>
                     `,
@@ -547,91 +550,49 @@ function Codemirror_fluid(props) {
     }
   }
 
-  function loadIframeContent() {
-    var iframe = document.getElementById(`output-${idR}`);
-    var docIframe = iframe.contentDocument || iframe.contentWindow.document;
-    if (!docIframe.body.innerHTML.trim()) {
-      docIframe.open();
-      docIframe.write(`
-          <!DOCTYPE html>
-          <html lang="es">
-          <head>
-            <style>
-              * {
-                transition: all 0.3s ease;
-              }
-            </style>
-            <style id="contenido-css-playground"></style>
-
-            <script
-              type="text/javascript"
-              src="https://jeff-aporta.github.io/ascii-maploader/static/js/index.all.min.js"
-            ></script>
-    
-            <script>
-              asciiMap.CLI.react_mui_fa();
-              asciiMap.CLI.fluidCSS();
-              asciiMap.CLI.JS2CSS();
-            </script>
-          </head>
-          <body>
-            <div id="contenido-html-playground">
-             cargando...
-            </div>
-          </body>
-          <script id="contenido-js-playground"></script>
-          <script type="text/babel" id="contenido-jsx-playground"></script>
-          <script type="text/babel">
-            if (typeof window != "undefined" && window["MaterialUI"]) {
-              Object.assign(window, window["MaterialUI"]);
-            }
-          </script>
-          </html>
-      `);
-      docIframe.close();
-    }
-  }
-
   function ejecutarCodigo() {
-    var contenidoHTML = editorHTML.getValue();
-    var contenidoCSS = editorCSS.getValue();
-    var contenidoJS = editorJS.getValue();
-    var contenidoJSX = editorJSX.getValue();
-    var iframe = document.getElementById(`output-${idR}`);
-    var docIframe = iframe.contentDocument || iframe.contentWindow.document;
-    loadIframeContent();
-    formatearCodigo();
+    const iframe = ref.current.querySelector("iframe");
+    const docIframe = iframe.contentDocument || iframe.contentWindow.document;
     modContenedor(
       docIframe.querySelector("#contenido-html-playground"),
-      contenidoHTML
+      textoHTML.current
     );
     modContenedor(
       docIframe.querySelector("#contenido-css-playground"),
-      contenidoCSS
+      textoCSS.current
     );
     modContenedor(
       docIframe.querySelector("#contenido-js-playground"),
-      contenidoJS
+      textoJS.current
     );
     modContenedor(
       docIframe.querySelector("#contenido-jsx-playground"),
-      contenidoJSX
+      textoJSX.current
     );
+    if (!docIframe.querySelector("#contenido-html-playground")) {
+      setTimeout(ejecutarCodigo, 100);
+    }
 
-    function modContenedor(contenedorHTML, value) {
-      if (contenedorHTML?.innerHTML != value) {
-        contenedorHTML.innerHTML = value;
+    function modContenedor(contenedor, contenido) {
+      if (!contenedor || !contenido) {
+        return;
+      }
+      if (contenedor.innerHTML != contenido) {
+        contenedor.innerHTML = contenido;
       }
     }
   }
 
   // Función para formatear el código usando Prettier
   function formatearCodigo() {
+    if (!editorHTML || !editorCSS || !editorJS || !editorJSX) {
+      return;
+    }
     try {
-      var contenidoHTML = textoHTML;
-      var contenidoCSS = textoCSS;
-      var contenidoJS = textoJS;
-      var contenidoJSX = textoJSX;
+      var contenidoHTML = textoHTML.current;
+      var contenidoCSS = textoCSS.current;
+      var contenidoJS = textoJS.current;
+      var contenidoJSX = textoJSX.current;
 
       let htmlFormateado = prettier.format(contenidoHTML, {
         parser: "html",
@@ -660,10 +621,10 @@ function Codemirror_fluid(props) {
       editorJS.setValue(jsFormateado);
       editorJSX.setValue(jsxFormateado);
 
-      setTextoHTML(htmlFormateado);
-      setTextoCSS(cssFormateado);
-      setTextoJS(jsFormateado);
-      setTextoJSX(jsxFormateado);
+      textoHTML.current = htmlFormateado;
+      textoCSS.current = cssFormateado;
+      textoJS.current = jsFormateado;
+      textoJSX.current = jsxFormateado;
     } catch (error) {
       alert("Error al formatear el código: " + error.message);
     }

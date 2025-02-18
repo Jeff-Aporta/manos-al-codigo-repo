@@ -265,8 +265,6 @@ function App() {
 }
 
 function DivCodemirror({
-  contador_iterativo,
-  indice_inicial,
   index_codemirror,
   titulo,
   descripcion,
@@ -284,9 +282,9 @@ function DivCodemirror({
     >
       <Typography variant="h2">{titulo}</Typography>
       <br />
-      <Typography variant="h4" style={{ color: "steelblue" }}>{`(Ejercicio ${
-        contador_iterativo + indice_inicial
-      })`}</Typography>
+      <Typography variant="h4" style={{ color: "steelblue" }}>
+        {nombre_proyecto.replaceAll("-", " ").replaceAll("_", " ")}
+      </Typography>
       <br />
       <p>{descripcion}</p>
       <Codemirror_fluid

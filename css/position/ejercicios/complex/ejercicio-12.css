@@ -18,10 +18,10 @@ html {
         backdrop-filter: none;
         box-sizing: border-box;
         --e: 1.3;
+        backdrop-filter: unset;
         .marco {
           --e: sqrt(2);
           border: 5px solid black;
-          background: white;
         }
       }
 
