@@ -1,16 +1,9 @@
-body,
-html {
+body{
   background: #016491;
 }
 
 .ejercicio {
   &#ejercicio-6 {
-
-    .ajuste {
-      & > .capa {
-        border: 7px solid white;
-      }
-    }
 
     .texto{
       position: fixed;

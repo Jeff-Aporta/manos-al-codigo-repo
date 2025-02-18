@@ -1,22 +1,17 @@
-body,
-html {
+body {
   background: white;
 }
 
 .ejercicio {
   &#ejercicio-5 {
-    .capa{
-      border-radius: 50%;
-    }
     .naranja {
-      background: darkorange;
       left: 35%;
       opacity: 0.6;
     }
     .roja {
       left: -35%;
     }
-    .texto{
+    .texto {
       top: 105%;
     }
   }

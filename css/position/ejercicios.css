@@ -1,28 +1,75 @@
 body,
 html {
   margin: 0;
-  margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  min-height: 100vh; /* Altura mínima: 100% del viewport */
+  min-height: 100vh;
   min-width: 100vw;
-  font-family: sans-serif, Arial, Helvetica;
-  font-size: 140%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+
+  font-size: 140%;
   user-select: none;
+  font-family: sans-serif, Arial, Helvetica;
 }
 
 .ejercicio {
   width: 150px;
   height: 150px;
-  position: relative; /* Para posicionar absolutamente a sus hijos */
+  position: relative;
 
   &.screen {
     .capa {
-      mix-blend-mode: screen; /* Modo de mezcla para efectos visuales */
+      mix-blend-mode: screen;
       box-shadow: 0 0 15px var(--fondo);
+    }
+  }
+
+  &.bd-invert {
+    .capa {
+      backdrop-filter: invert();
+    }
+  }
+
+  &.sin-redondeo {
+    .capa {
+      border-radius: 0;
+    }
+  }
+
+  &.centradas {
+    .capa {
+      --tx: -50%;
+      --ty: -50%;
+      left: 50%;
+      top: 50%;
+    }
+  }
+  .centralizadas {
+    .capa {
+      --tx: -50%;
+      --ty: -50%;
+    }
+  }
+  .blancas {
+    .capa {
+      --fondo: white;
+    }
+  }
+  &.hijas-centradas {
+    & > .capa {
+      --tx: -50%;
+      --ty: -50%;
+      left: 50%;
+      top: 50%;
+    }
+  }
+
+  .bordear-hijos-blanco {
+    & > .capa {
+      border: 7px solid white;
     }
   }
 
@@ -30,14 +77,16 @@ html {
     --tx: 0;
     --ty: 0;
     --e: 1;
+    --ew: 1;
+    --eh: 1;
     --e-powsin: 0;
     --a: 0;
     position: absolute;
-    width: calc(100% * var(--e));
-    height: calc(100% * var(--e));
+    width: calc(100% * var(--e) * var(--ew));
+    height: calc(100% * var(--e) * var(--eh));
 
     border-radius: 15px;
-    background: var(--fondo); /* Se usará la variable --fondo para el color */
+    background: var(--fondo);
 
     transform: translate(var(--tx), var(--ty)) rotate(var(--a))
       scale(pow(sin(45deg), var(--e-powsin)));
@@ -95,7 +144,7 @@ html {
       top: 50%;
     }
 
-    &.p-event-none{
+    &.p-event-none {
       pointer-events: none;
     }
 
@@ -114,6 +163,9 @@ html {
     &.roja {
       --fondo: red;
     }
+    &.naranja {
+      background: darkorange;
+    }
     &.verde {
       --fondo: lime;
     }
@@ -122,6 +174,9 @@ html {
     }
     &.blanca {
       --fondo: white;
+    }
+    &.negra {
+      background: black;
     }
   }
 }

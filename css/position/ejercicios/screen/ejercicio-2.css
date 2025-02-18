@@ -6,7 +6,7 @@ body {
   /* Estilos específicos para el ejercicio número 4 */
   &#ejercicio-2 {
     .capa{
-      width: 140%;
+      --ew: 1.4;
     }
     .azul {
       top: -20%;

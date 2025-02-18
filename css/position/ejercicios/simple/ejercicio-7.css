@@ -1,5 +1,4 @@
-body,
-html {
+body{
   background: linear-gradient(hsl(207, 100%, 30%), deepskyblue);
 }
 

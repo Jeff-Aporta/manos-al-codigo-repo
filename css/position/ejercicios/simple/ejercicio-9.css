@@ -1,5 +1,4 @@
-body,
-html {
+body{
   background: white;
 }
 
@@ -8,9 +7,6 @@ html {
     .capa{
       border: 7px solid white;
       cursor: pointer;
-      &:hover{
-        opacity: 0.7;
-      }
     }
     #marco-interno, #fondo{
       border-radius: 25%;

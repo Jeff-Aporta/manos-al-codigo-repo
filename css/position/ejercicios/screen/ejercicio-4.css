@@ -9,9 +9,7 @@ html {
     /* Aumenta el ancho y centra horizontalmente las cajas roja y azul */
     .roja,
     .azul {
-      width: 140%;
-      left: 50%;
-      transform: translateX(-50%);
+      --ew: 1.4;
     }
     /* Posición vertical individual para cada una */
     .azul {
@@ -24,14 +22,7 @@ html {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
     }
-    /* Posicionamiento específico para los elementos identificados como verde-1 y verde-2 */
-    #verde-1 {
-      left: 0;
-      top: 0;
-    }
     #verde-2 {
-      left: 0;
-      top: 0;
       transform: rotate(45deg);
     }
   }
