@@ -2,15 +2,25 @@
 <html lang="es">
   <head>
     <style>
-      * {
-        transition: all 0.5s ease;
-        animation: opacityIn 0.5s ease-in forwards;
-        animation-fill-mode: none;
-        .animation_whIn, .capa{
+      @media not (pointer: coarse) {
+        * {
+          transition: all 0.5s ease;
+          animation: opacityIn 0.5s ease-in forwards;
+          animation-fill-mode: none;
+          .animation_whIn,
+          .capa {
             animation: whIn 0.5s ease-in forwards;
             animation-fill-mode: none;
+          }
         }
       }
+
+      @media (pointer: coarse) {
+        body {
+          pointer-events: none;
+        }
+      }
+
       @keyframes opacityIn {
         0% {
           opacity: 0;
@@ -21,8 +31,8 @@
       }
       @keyframes whIn {
         0% {
-            width: 0%;
-            height: 0%;
+          width: 0%;
+          height: 0%;
         }
         100% {
           width: 100%;

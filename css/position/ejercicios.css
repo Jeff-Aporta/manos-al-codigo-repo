@@ -11,6 +11,7 @@ html {
   font-family: sans-serif, Arial, Helvetica;
   font-size: 140%;
   overflow: hidden;
+  user-select: none;
 }
 
 .ejercicio {
@@ -18,8 +19,8 @@ html {
   height: 150px;
   position: relative; /* Para posicionar absolutamente a sus hijos */
 
-  &.screen{
-    .capa{
+  &.screen {
+    .capa {
       mix-blend-mode: screen; /* Modo de mezcla para efectos visuales */
       box-shadow: 0 0 15px var(--fondo);
     }
@@ -34,75 +35,82 @@ html {
     position: absolute;
     width: calc(100% * var(--e));
     height: calc(100% * var(--e));
-    
+
     border-radius: 15px;
     background: var(--fondo); /* Se usará la variable --fondo para el color */
 
-    transform: translate(var(--tx), var(--ty)) rotate(var(--a)) scale(pow(sin(45deg), var(--e-powsin)));
+    transform: translate(var(--tx), var(--ty)) rotate(var(--a))
+      scale(pow(sin(45deg), var(--e-powsin)));
 
-    &.texto{
+    &.texto {
       width: fit-content;
       height: fit-content;
 
-      &.bolder{
+      &.bolder {
         font-weight: bolder;
       }
     }
 
-    &.circular{
+    &.circular {
       border-radius: 50%;
     }
 
-    &.cuadrada{
+    &.cuadrada {
       border-radius: 0;
     }
 
-    &.mitad-ancho{
+    &.mitad-ancho {
       width: 50%;
     }
-    &.mitad{
+    &.mitad {
       --e: 0.5;
     }
-    &.rotar-45{
+    &.rotar-45 {
       --a: -45deg;
     }
-    &.rotar45{
+    &.rotar45 {
       --a: 45deg;
     }
-    &.abajo{
+    &.abajo {
       bottom: 0;
     }
-    &.derecha{
+    &.derecha {
       right: 0;
     }
 
-    &.centrado-horizontal{
+    &.centrado-horizontal {
       left: 50%;
       --tx: -50%;
     }
 
-    &.centralizada{
+    &.centralizada {
       --tx: -50%;
       --ty: -50%;
     }
 
-    &.centrada{
+    &.centrada {
       --tx: -50%;
       --ty: -50%;
       left: 50%;
       top: 50%;
     }
 
-    &.roja, &.verde, &.azul, &.blanca, &.naranja, &.negra{
+    &.p-event-none{
+      pointer-events: none;
+    }
+
+    &.roja,
+    &.verde,
+    &.azul,
+    &.blanca,
+    &.naranja,
+    &.negra {
       cursor: pointer;
-      &:hover{
-        opacity: 0.7;
+      &:hover {
+        opacity: 0.5;
       }
     }
 
-
-
-    /* Clases para definir diferentes colores */
     &.roja {
       --fondo: red;
     }
@@ -112,7 +120,7 @@ html {
     &.azul {
       --fondo: blue;
     }
-    &.blanca{
+    &.blanca {
       --fondo: white;
     }
   }
