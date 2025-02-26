@@ -1,5 +1,4 @@
-body,
-html {
+body {
   background: black; /* Fondo negro */
 }
 
@@ -21,9 +20,6 @@ html {
       top: -30%;
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
-    }
-    #verde-2 {
-      transform: rotate(45deg);
     }
   }
 }

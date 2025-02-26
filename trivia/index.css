@@ -68,10 +68,6 @@ body {
 
 .app {
   display: flex;
-  justify-content: space-between;
-  gap: 50px;
-
-  max-width: 1200px;
 
   .pregunta,
   .opciones > .renglon-opn > div {

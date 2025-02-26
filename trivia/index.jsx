@@ -1,12 +1,11 @@
-
 let base_preguntas = [...base_preguntas_ev1];
 
 const nombresString = params.get("jugadores") ?? "Usted";
-const theme = params.get("theme");
+const paramTheme = params.get("theme");
 const mouseup = params.get("mouseup");
 
-if (theme && theme != "all") {
-  base_preguntas = base_preguntas.filter((e) => e.theme == theme);
+if (paramTheme && paramTheme != "all") {
+  base_preguntas = base_preguntas.filter((e) => e.theme == paramTheme);
 }
 
 const nombresArray = nombresString.split(",");
@@ -37,7 +36,7 @@ console.log(generarURLJugadores());
 
 function responder(btn_class) {
   if (index > 0 && Date.now() - momentoCargarPregunta < 1500) {
-    return
+    return;
   }
   if (wait || index >= base_preguntas.length) {
     return;
@@ -175,25 +174,23 @@ function cargarPregunta() {
 
 function App() {
   return (
-    <React.Fragment>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <div
+        style={{ alignItems: "center", width: "90dvw" }}
         className={fluidCSS()
           .ltX(1000, {
             flexDirection: ["column"],
-            alignItems: ["stretch", "center"],
+            gap: "25px",
           })
           .end("app")}
       >
         <div
-          className={fluidCSS()
-            .ltX(1000, {
-              width: ["100%", "80%"],
-            })
-            .end()}
           style={{
             display: "flex",
+            justifyContent: "center",
             flexWrap: "wrap",
             gap: "15px",
+            padding: "10px",
           }}
         >
           <span className="msg" style={{ opacity: 0 }}>
@@ -264,26 +261,29 @@ function App() {
             .end("marca")}
         >
           Manos al código
-          <img src="logo_128x128.png" />
+          <img src="src/img/logo_128x128.png" />
         </a>
       </div>
-    </React.Fragment>
+    </div>
   );
 
   function Separador() {
-    return <div
-      className={fluidCSS()
-        .gtX(1000, {
-          display: "none",
-        })
-        .btwX([450, 750],{
-          opacity: [1, 0.5, 0.3]
-        })
-        .end()}
-      style={{
-        background: "white",
-        height: "2px",
-      }} />;
+    return (
+      <div
+        className={fluidCSS()
+          .gtX(1000, {
+            display: "none",
+          })
+          .btwX([450, 750], {
+            opacity: [1, 0.5, 0.3],
+          })
+          .end()}
+        style={{
+          background: "white",
+          height: "2px",
+        }}
+      />
+    );
   }
 }
 
@@ -301,5 +301,7 @@ document.addEventListener("keyup", pressContinue);
 if (mouseup != "block") {
   document.addEventListener("mouseup", pressContinue);
 }
+
 cargarPregunta();
-fluidCSS.actualizarStyle();
+
+fluidCSS().actualizarStyle();

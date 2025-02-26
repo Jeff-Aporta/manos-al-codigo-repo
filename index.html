@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manos al Código</title>
-    <style class="fromjs"></style>
 
     <link rel="icon" type="image/png" href="src/img/logo_128x128.png" />
     <link rel="apple-touch-icon" href="src/img/logo_128x128.png" />
@@ -12,49 +11,97 @@
     <meta property="og:site_name" content="Manos al Código" />
     <meta property="og:title" content="Manos al Código | Colectivo en acción" />
     <meta property="og:description" content="Colectivo en acción" />
-    <meta property="og:image" content="src/img/src/img/logo_128x128.png" />
+    <meta property="og:image" content="src/img/logo_128x128.png" />
+
+    <script>
+      {
+        var ja = "https://jeff-aporta.github.io/";
+        var a = "ascii-maploader/static/js/index.all.min.js";
+        if (!window.location.href.includes("github")) {
+          window["jeff-aporta-default"] = "../";
+          ja = window["jeff-aporta-default"];
+        }
+        var asciiurl =  ja + a;
+        const script= document.createElement("script");
+        script.src = asciiurl;
+        document.write(script.outerHTML);
+      }
+    </script>
 
     <script
       type="text/javascript"
-      src="https://jeff-aporta.github.io/ascii-maploader/static/js/index.all.min.js"
+      src=
     ></script>
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const pubid = params.get("pub");
-      const pub_estructura = {
-        "desafios-de-diseño-css": {
-          root: "css/position",
-          tree: (root) => {
-          },
-        },
-      };
-      let rootfolder;
 
+    <script>
       asciiMap.CLI.react_mui_fa();
       asciiMap.CLI.fluidCSS();
       asciiMap.CLI.JS2CSS();
 
-      const tree = asciiMap.tree().jsx("00-muitheme");
-      if (!pubid) {
-        tree.subDir("trivia", (trivia) => {
-          trivia.css("index").js("banco").jsx("../00-muitheme", "index");
+      asciiMap.CLI.prettier_codemirror();
+      asciiMap.CLI.FileSaver_jszip();
+
+      let rootfolder;
+
+      const params = new URLSearchParams(window.location.search);
+      let pubid = params.get("pub");
+
+      const pub_estructura = {
+        "desafios-de-diseno-css": {
+          root: "css/position",
+          tree: (root, node) => {
+            asciiMap.CLI.myUI().playground();
+          },
+        },
+        trivia: {
+          root: "trivia",
+          tree: (root, node) => {
+            node.js("banco");
+          },
+        },
+      };
+
+      const tree = asciiMap.tree();
+
+      tree.newBranch("recurrente", (recurrente) => {
+        recurrente.jsx("00-muitheme");
+      });
+
+      if (params.get("theme") && !pubid) {
+        pubid = "trivia";
+      }
+
+      verificarExistenciaSinAcentos();
+
+      if (pubid) {
+        rootfolder = pub_estructura[pubid].root;
+
+        tree.css("index").js("tools");
+
+        tree.newBranch(rootfolder, (subTree) => {
+          pub_estructura[pubid].tree(tree, subTree);
+          subTree.jsxcss("index");
         });
       } else {
-        rootfolder = pub_estructura[pubid].root
-        asciiMap.CLI.prettier_codemirror();
-        asciiMap.CLI.FileSaver_jszip();
-        
-        tree.css("theme").js("tools").jsx("00-muitheme");
-
-        tree.subDir("recurrente", (recurrente) => {
-          recurrente.css("codemirror-prettier").jsx("codemirror");
-        });
-
-        tree.subDir(rootfolder, (subTree) => {
-          pub_estructura[pubid].tree(subTree);
-          subTree.jsx("index");
-        });
+        params.set("pub", "trivia");
+        window.history.replaceState(
+          {},
+          null,
+          window.location.pathname + "?" + params.toString()
+        );
       }
+
+      function verificarExistenciaSinAcentos() {
+        if (pubid && !pub_estructura[pubid]) {
+          pubid = pubid
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replaceAll(" ", "-")
+            .replaceAll("_", "-");
+        }
+      }
+
       tree.writehtml();
     </script>
   </head>
@@ -73,7 +120,11 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 90vh;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
         }
       </style>
     </div>

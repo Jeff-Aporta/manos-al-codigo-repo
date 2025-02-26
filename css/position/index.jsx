@@ -1,7 +1,17 @@
-ReactDOM.render(App(), document.getElementById("root"));
+var template_html = (() => {
+  const s = loadStringsSync(
+    asciiMap.CLI.myUI().playground_template.html_jsdelivr
+  );
+  if (s) {
+    return s
+      .replaceAll("iframe.css", asciiMap.CLI.myUI().playground_template.css)
+      .replaceAll("iframe.js", asciiMap.CLI.myUI().playground_template.js);
+  }
+})();
 
 function App() {
   let indice_codemirror_contador = 0;
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -255,8 +265,8 @@ function App() {
           index_codemirror: indice_codemirror_contador++,
           HTML: force_extension(pathjoin(folder, info.filename), "html"),
           CSS: [
-            pathjoin(rootfolder, "ejercicios.css"),
             force_extension(pathjoin(folder, info.filename), "css"),
+            pathjoin(rootfolder, "ejercicios.css"),
           ],
         }}
       />
@@ -287,7 +297,21 @@ function DivCodemirror({
       </Typography>
       <br />
       <p>{descripcion}</p>
-      <Codemirror_fluid
+      <Editor_en_linea
+        playground_extra_clases={""}
+        nombre_proyecto={nombre_proyecto}
+        plantilla_HTML={template_html}
+        files={{
+          HTML,
+          CSS,
+        }}
+        extra_js=""
+        index={index_codemirror}
+        ocultar_pestaña_JS={true}
+        ocultar_pestaña_JSX={true}
+      />
+      {/*       <Codemirror_fluid
+        templateHTML="recurrente/template.html"
         index={index_codemirror}
         nombre_proyecto={nombre_proyecto}
         files={{
@@ -296,7 +320,11 @@ function DivCodemirror({
         }}
         hideJS
         hideJSX
-      />
+      /> */}
     </Paper>
   );
 }
+
+setTimeout(() => {
+  ReactDOM.render(App(), document.getElementById("root"));
+});
