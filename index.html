@@ -84,11 +84,7 @@
         });
       } else {
         params.set("pub", "trivia");
-        window.history.replaceState(
-          {},
-          null,
-          window.location.pathname + "?" + params.toString()
-        );
+        window.location.href = window.location.pathname + "?" + params.toString();
       }
 
       function verificarExistenciaSinAcentos() {
