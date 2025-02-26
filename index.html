@@ -85,7 +85,9 @@
       } else {
         params.set("pub", "trivia");
         window.location.href = window.location.pathname + "?" + params.toString();
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload()
+        }, 100);
       }
 
       function verificarExistenciaSinAcentos() {
