@@ -84,7 +84,9 @@
         });
       } else {
         params.set("pub", "trivia");
-        window.location.href = window.location.pathname + "?" + params.toString();
+        const nr = window.location.pathname + "?" + params.toString();
+        window.location.href = nr;
+        window.location.assign(nr);
         setTimeout(() => {
           window.location.reload()
         }, 100);
