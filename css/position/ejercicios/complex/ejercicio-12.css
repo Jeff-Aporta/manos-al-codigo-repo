@@ -1,37 +1,18 @@
 body {
-  background: linear-gradient(black, darkred, red, darkred, black);
+  background: linear-gradient(to right top, black, darkred, black);
 }
 
-.ejercicio {
-  &#ejercicio-12 {
-    .capa {
-      cursor: pointer;
-      &:hover{
-        opacity: 0.7;
-      }
+.diseño#ejercicio-12 {
+  .borde-negro {
+    border: 5px solid black;
+  }
+  #izquierda-arriba {
+    right: 50%;
+    bottom: 50%;
+  }
 
-      &.ajuste {
-        backdrop-filter: none;
-        box-sizing: border-box;
-        --e: 1.3;
-        backdrop-filter: unset;
-        .marco {
-          --e: sqrt(2);
-          border: 5px solid black;
-        }
-      }
-
-      &#izquierda-arriba {
-        --e: calc(1 / sqrt(2));
-        left: 50%;
-        top: 50%;
-      }
-
-      &#derecha-abajo {
-        --e: calc(sqrt(2) / 2);
-        right: 50%;
-        bottom: 50%;
-      }
-    }
+  #derecha-abajo {
+    left: 50%;
+    top: 50%;
   }
 }

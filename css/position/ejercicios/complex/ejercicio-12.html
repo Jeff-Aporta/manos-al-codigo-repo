@@ -1,25 +1,50 @@
-<div class="ejercicio bd-invert sin-redondeo" id="ejercicio-12">
-  <div class="capa ajuste centrada">
-    <div class="capa blanca centrada marco"></div>
+<div class="diseño sin-redondeo" id="ejercicio-12">
+  <!-- Fondo sobre el que se hará la inversión del patrón -->
+  <div class="capa blanca centrar ocultar-salidas" style="--escala: sqrt(2)">
+    <div class="capa negra" id="derecha-abajo"></div>
+    <div class="capa negra" id="izquierda-arriba"></div>
+    <div class="capa rotar45">
+      <div class="capa negra" id="derecha-abajo"></div>
+      <div class="capa negra" id="izquierda-arriba"></div>
+    </div>
+  </div>
+  <!-- Marco exterior, negro -->
+  <div class="capa borde-negro centrar p-event-none" style="--escala: sqrt(2)"></div>
 
-    <div class="capa" id="derecha-abajo"></div>
-    <div class="capa" id="izquierda-arriba"></div>
+  <!-- Figura principal a repetir recursivamente -->
+  <div class="capa backdrop-invert"></div>
+  <div class="capa rotar45 backdrop-invert"></div>
 
-    <div class="capa e-powsin"></div>
-    <div class="capa rotar45 e-powsin"></div>
-    <div class="capa e-powsin" style="--e-powsin: 1"></div>
-    <div class="capa rotar45 e-powsin" style="--e-powsin: 1"></div>
-    <div class="capa e-powsin" style="--e-powsin: 2"></div>
-    <div class="capa rotar45 e-powsin" style="--e-powsin: 2"></div>
-    <div class="capa e-powsin" style="--e-powsin: 3"></div>
-    <div class="capa rotar45 e-powsin" style="--e-powsin: 3"></div>
-    <div class="capa e-powsin" style="--e-powsin: 4"></div>
-    <div class="capa rotar45 e-powsin" style="--e-powsin: 4"></div>
-    <div class="capa e-powsin" style="--e-powsin: 5"></div>
-    <div class="capa rotar45 e-powsin" style="--e-powsin: 5"></div>
-    <div class="capa e-powsin" style="--e-powsin: 6"></div>
-    <div class="capa rotar45 e-powsin" style="--e-powsin: 6"></div>
-
-    <div class="capa centrada marco p-event-none"></div>
+  <!-- 
+    Estructura recursiva en base a:
+    
+      <div class="capa centrar" style="--escala: sin(45deg)">
+        <div class="capa backdrop-invert"></div>
+        <div class="capa rotar45 backdrop-invert"></div>
+      </div>
+  -->
+  <div class="capa centrar" style="--escala: sin(45deg)">
+    <div class="capa backdrop-invert"></div>
+    <div class="capa rotar45 backdrop-invert"></div>
+    <div class="capa centrar" style="--escala: sin(45deg)">
+      <div class="capa backdrop-invert"></div>
+      <div class="capa rotar45 backdrop-invert"></div>
+      <div class="capa centrar" style="--escala: sin(45deg)">
+        <div class="capa backdrop-invert"></div>
+        <div class="capa rotar45 backdrop-invert"></div>
+        <div class="capa centrar" style="--escala: sin(45deg)">
+          <div class="capa backdrop-invert"></div>
+          <div class="capa rotar45 backdrop-invert"></div>
+          <div class="capa centrar" style="--escala: sin(45deg)">
+            <div class="capa backdrop-invert"></div>
+            <div class="capa rotar45 backdrop-invert"></div>
+            <div class="capa centrar" style="--escala: sin(45deg)">
+              <div class="capa backdrop-invert"></div>
+              <div class="capa rotar45 backdrop-invert"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

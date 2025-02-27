@@ -2,17 +2,15 @@ body {
   background: white;
 }
 
-.ejercicio {
-  &#ejercicio-5 {
-    .naranja {
-      left: 35%;
-      opacity: 0.6;
-    }
-    .roja {
-      left: -35%;
-    }
-    .texto {
-      top: 105%;
-    }
+.diseño#ejercicio-5 {
+  .naranja {
+    left: 35%;
+    opacity: 0.6;
+  }
+  .roja {
+    left: -35%;
+  }
+  .texto {
+    top: 105%;
   }
 }

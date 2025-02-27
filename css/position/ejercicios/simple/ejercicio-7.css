@@ -2,10 +2,10 @@ body{
   background: linear-gradient(hsl(207, 100%, 30%), deepskyblue);
 }
 
-.ejercicio {
+.diseño {
   &#ejercicio-7 {
     .roja {
-      --e: 1.5;
+      --escala: 1.5;
     }
     .azul {
       background: mediumblue;

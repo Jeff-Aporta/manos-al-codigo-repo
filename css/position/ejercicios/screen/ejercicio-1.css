@@ -1,17 +1,14 @@
 body {
-  background: black; /* Fondo negro */
+  background: black; 
 }
 
-.ejercicio {
-  /* Estilos específicos para el ejercicio número 4 */
-  &#ejercicio-1 {
-    .roja{
-      left: -20%;
-      top: 20%;
-    }
-    .azul{
-      left: 20%;
-      top: -20%;
-    }
+.diseño#ejercicio-1 {
+  .roja {
+    left: -20%;
+    top: 20%;
+  }
+  .azul {
+    left: 20%;
+    top: -20%;
   }
 }

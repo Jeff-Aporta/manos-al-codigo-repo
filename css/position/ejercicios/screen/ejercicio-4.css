@@ -1,25 +1,34 @@
 body {
-  background: black; /* Fondo negro */
+  background: black;
 }
 
-.ejercicio {
-  /* Estilos específicos para el ejercicio número 4 */
-  &#ejercicio-4 {
-    /* Aumenta el ancho y centra horizontalmente las cajas roja y azul */
-    .roja,
-    .azul {
-      --ew: 1.4;
-    }
-    /* Posición vertical individual para cada una */
-    .azul {
-      top: 30%;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-    .roja {
-      top: -30%;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+.diseño#ejercicio-4 {
+  --aw: 11px; /* Valor que se aproxima al desface por redondeamiento de vertices */
+
+  /* La diagonal vale sqrt(2) */
+
+  /* dv (desface vertical):
+        El excedente es: uno menos la diagonal (1-sqrt(2))
+        Se convierte a porcentaje multiplicando por 100%
+  */
+  --dv: calc(
+    100% * (1 - sqrt(2)) + var(--aw)
+  ); 
+  /* nw (nuevo width):
+        es la diagonal
+        Se convierte a porcentaje multiplicando por 100%
+  */
+  --nw: calc(100% * sqrt(2) - var(--aw)); 
+
+  .roja,
+  .azul {
+    width: var(--nw);
+  }
+
+  .azul {
+    top: calc(var(--dv) / 2);
+  }
+  .roja {
+    top: calc(var(--dv) / -2);
   }
 }

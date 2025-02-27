@@ -1,39 +1,42 @@
-body{
+body {
   background: #016491;
 }
 
-.ejercicio {
-  &#ejercicio-6 {
+.diseño#ejercicio-6 {
+  .bordear-capas-en-blanco {
+    & > .capa {
+      border: 7px solid white;
+    }
+  }
 
-    .texto{
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      color: white;
-      font-size: 130%;
-      text-align: center;
-    }
+  .texto {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 130%;
+    text-align: center;
+  }
 
-    .detalle-domino {
-      --e: 0.35;
+  .detalle-domino {
+    --escala: 0.35;
+  }
+  .azul {
+    background: #016491;
+    left: -50%;
+    border-radius: 15px 0 0 15px;
+    #detalle-1 {
+      left: 30%;
+      top: 30%;
     }
-    .azul {
-      background: #016491;
-      left: -50%;
-      border-radius: 15px 0 0 15px;
-      #detalle-1 {
-        left: 30%;
-        top: 30%;
-      }
-      #detalle-2 {
-        left: 70%;
-        top: 70%;
-      }
+    #detalle-2 {
+      left: 70%;
+      top: 70%;
     }
-    .roja {
-      background: crimson;
-      left: 52%;
-      border-radius: 0 15px 15px 0;
-    }
+  }
+  .roja {
+    background: crimson;
+    left: 52%;
+    border-radius: 0 15px 15px 0;
   }
 }

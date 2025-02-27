@@ -2,7 +2,7 @@ body{
   background: white;
 }
 
-.ejercicio {
+.diseño {
   &#ejercicio-9 {
     .capa{
       border: 7px solid white;
@@ -12,15 +12,15 @@ body{
       border-radius: 25%;
     }
     #marco-interno{
-      --e: 0.65;
+      --escala: 0.65;
       #AF{
-        --e:0;
+        --escala:0;
         top: 10px;
         right: 10px;
       }
     }
     #lente{
-      --e: 0.3;
+      --escala: 0.3;
     }
     #fondo {
       background: radial-gradient( circle at 25% 80%, #fcb045, #fd1d1d, #833ab4);

@@ -1,3 +1,5 @@
+/* CSS general para todos los ejercicios----- */
+
 body,
 html {
   margin: 0;
@@ -15,7 +17,29 @@ html {
   font-family: sans-serif, Arial, Helvetica;
 }
 
-.ejercicio {
+.ocultar-salidas {
+  overflow: hidden;
+}
+
+.centrar-capas-primer-nivel {
+  & > .capa {
+    --tx: -50% !important;
+    --ty: -50% !important;
+    left: 50%;
+    top: 50%;
+  }
+}
+
+.centrar-capas {
+  .capa {
+    --tx: -50% !important;
+    --ty: -50% !important;
+    left: 50%;
+    top: 50%;
+  }
+}
+
+.diseño {
   width: 150px;
   height: 150px;
   position: relative;
@@ -23,13 +47,7 @@ html {
   &.screen {
     .capa {
       mix-blend-mode: screen;
-      box-shadow: 0 0 15px var(--fondo);
-    }
-  }
-
-  &.bd-invert {
-    .capa {
-      backdrop-filter: invert();
+      box-shadow: 0 0 15px var(--color-capa);
     }
   }
 
@@ -39,57 +57,39 @@ html {
     }
   }
 
-  &.centradas {
-    .capa {
-      --tx: -50%;
-      --ty: -50%;
-      left: 50%;
-      top: 50%;
-    }
-  }
-  .centralizadas {
+  .centralizar-capas {
     .capa {
       --tx: -50%;
       --ty: -50%;
     }
   }
-  .blancas {
+  .capas-blancas {
     .capa {
-      --fondo: white;
-    }
-  }
-  &.hijas-centradas {
-    & > .capa {
-      --tx: -50%;
-      --ty: -50%;
-      left: 50%;
-      top: 50%;
-    }
-  }
-
-  .bordear-hijos-blanco {
-    & > .capa {
-      border: 7px solid white;
+      --color-capa: white;
     }
   }
 
   .capa {
     --tx: 0;
     --ty: 0;
-    --e: 1;
-    --ew: 1;
-    --eh: 1;
-    --e-powsin: 0;
-    --a: 0;
+    --escala: 1;
+    --angulo-rotar: 0;
+    --color-capa: none;
     position: absolute;
-    width: calc(100% * var(--e) * var(--ew));
-    height: calc(100% * var(--e) * var(--eh));
+    cursor: pointer;
+
+    width: calc(100% * var(--escala));
+    height: calc(100% * var(--escala));
 
     border-radius: 15px;
-    background: var(--fondo);
+    background: var(--color-capa);
 
-    transform: translate(var(--tx), var(--ty)) rotate(var(--a))
-      scale(pow(sin(45deg), var(--e-powsin)));
+    transform: translate(var(--tx), var(--ty)) rotate(var(--angulo-rotar));
+
+    &:hover{
+      border: 3px solid red !important;
+      filter: drop-shadow(0 0 10px white);
+    }
 
     &.texto {
       width: fit-content;
@@ -112,13 +112,13 @@ html {
       width: 50%;
     }
     &.mitad {
-      --e: 0.5;
+      --escala: 0.5;
     }
     &.rotar-45 {
-      --a: -45deg;
+      --angulo-rotar: -45deg;
     }
     &.rotar45 {
-      --a: 45deg;
+      --angulo-rotar: 45deg;
     }
     &.abajo {
       bottom: 0;
@@ -137,7 +137,7 @@ html {
       --ty: -50%;
     }
 
-    &.centrada {
+    &.centrar {
       --tx: -50%;
       --ty: -50%;
       left: 50%;
@@ -148,35 +148,27 @@ html {
       pointer-events: none;
     }
 
-    &.roja,
-    &.verde,
-    &.azul,
-    &.blanca,
-    &.naranja,
-    &.negra {
-      cursor: pointer;
-      &:hover {
-        opacity: 0.5;
-      }
+    &.backdrop-invert {
+      backdrop-filter: invert();
     }
 
     &.roja {
-      --fondo: red;
+      --color-capa: red;
     }
     &.naranja {
-      background: darkorange;
+      --color-capa: darkorange;
     }
     &.verde {
-      --fondo: lime;
+      --color-capa: lime;
     }
     &.azul {
-      --fondo: blue;
+      --color-capa: blue;
     }
     &.blanca {
-      --fondo: white;
+      --color-capa: white;
     }
     &.negra {
-      background: black;
+      --color-capa: black;
     }
   }
 }

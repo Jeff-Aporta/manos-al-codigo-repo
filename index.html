@@ -35,6 +35,7 @@
 
     <script>
       asciiMap.CLI.react_mui_fa();
+      asciiMap.CLI.myUI().comun.all();
       asciiMap.CLI.fluidCSS();
       asciiMap.CLI.JS2CSS();
 
@@ -63,10 +64,6 @@
 
       const tree = asciiMap.tree();
 
-      tree.newBranch("recurrente", (recurrente) => {
-        recurrente.jsx("00-muitheme");
-      });
-
       if (params.get("theme") && !pubid) {
         pubid = "trivia";
       }
@@ -76,7 +73,7 @@
       if (pubid) {
         rootfolder = pub_estructura[pubid].root;
 
-        tree.css("index").js("tools");
+        tree.css("index");
 
         tree.newBranch(rootfolder, (subTree) => {
           pub_estructura[pubid].tree(tree, subTree);
