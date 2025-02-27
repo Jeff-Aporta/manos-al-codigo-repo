@@ -224,7 +224,7 @@ function App() {
             [
               {
                 filename: "ejercicio-12",
-                titulo: `Estrella Tartésica con Patrón de Hipnosis`,
+                titulo: `Estrella Tartésica concéntrica recursiva`,
                 descripcion: `
                   Un diseño geométrico inspirado en la estrella tartésica, 
                   combinado con un patrón hipnótico que crea una sensación 
