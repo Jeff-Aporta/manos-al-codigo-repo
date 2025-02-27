@@ -86,9 +86,10 @@ html {
 
     transform: translate(var(--tx), var(--ty)) rotate(var(--angulo-rotar));
 
-    &:hover{
+    &:hover {
       border: 3px solid red !important;
       filter: drop-shadow(0 0 10px white);
+      opacity: 0.8;
     }
 
     &.texto {

@@ -68,7 +68,7 @@
         pubid = "trivia";
       }
 
-      verificarExistenciaSinAcentos();
+      pubid = pubid_ajustada();
 
       if (pubid) {
         rootfolder = pub_estructura[pubid].root;
@@ -89,9 +89,12 @@
         }, 100);
       }
 
-      function verificarExistenciaSinAcentos() {
-        if (pubid && !pub_estructura[pubid]) {
-          pubid = pubid
+      function pubid_ajustada(p) {
+        if (!p) {
+          p = pubid;
+        }
+        if (p) {
+          return p
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
             .toLowerCase()

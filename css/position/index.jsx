@@ -29,11 +29,15 @@ function App() {
       <Header />
       <div id="contenido">
         <Typography variant="h1">
-          <span>
-            {playground_id && playground_id.lenght > 1 ? "Desafios" : "Desafio"}
-          </span>
-          &nbsp;
-          <span>de diseño CSS</span>
+          <b>
+            <span>
+              {!playground_id || playground_id.lenght > 1
+                ? "Desafios"
+                : "Desafio"}
+            </span>
+            &nbsp;
+            <span>de diseño CSS</span>
+          </b>
         </Typography>
         <br />
         <hr />
@@ -63,6 +67,10 @@ function App() {
             ".circular": "convierte la capa en circulo.",
           })}
         </Paper>
+        <br />
+        <hr />
+        <br />
+        <VideosRelacionados />
         <br />
         <hr />
         <br />
@@ -142,7 +150,8 @@ function App() {
                     <br />
                     <br />
                     <hr />
-                    <Typography variant="h4">Sumario de clases</Typography>
+                    <br />
+                    <Typography variant="h4">Sumario</Typography>
                     <br />
                     {hacer_sumario({
                       "#detalle-1, #detalle-2":
@@ -227,49 +236,56 @@ function App() {
             carpeta_ejercicio("complex")
           );
         })()}
-        {(() => {
-          if (playground_id) {
-            return;
-          }
-          return (
-            <Paper elevation={4} style={{ padding: "10px" }}>
-              <Typography variant="h3">Recorrido de videos</Typography>
-              <br />
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  gap: "20px",
-                  flexWrap: "wrap",
-                }}
-              >
-                {[
-                  "https://www.youtube.com/embed/kmFAUp7SwAs?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
-                  "https://www.youtube.com/embed/LGjkbsE6_5I?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
-                  "https://www.youtube.com/embed/9Wyf2yQCFgQ?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
-                  "https://www.youtube.com/embed/ZfFNVlyti_4?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
-                  "https://www.youtube.com/embed/pymesYfmeKc?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
-                ].map((video_url) => (
-                  <iframe
-                    width="320"
-                    height="180"
-                    className={fluidCSS()
-                      .btwX([300, 1000], {})
-                      .end("miniatura-youtube")}
-                    src={video_url}
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    allowfullscreen
-                  ></iframe>
-                ))}
-              </div>
-            </Paper>
-          );
-        })()}
       </div>
+      <br />
+      <Paper elevation={6} className="pad-20px d-flex jc-end ai-end fs-150p" style={{ height: "400px" }}>
+        Manos al código.
+      </Paper>
     </ThemeProvider>
   );
+
+  function VideosRelacionados() {
+    if (playground_id) {
+      return;
+    }
+    return (
+      <Paper className="pad-20px">
+        <Typography variant="h3">Serie de videos</Typography>
+        <br />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "start",
+            gap: "20px",
+            flexWrap: "wrap",
+          }}
+        >
+          {[
+            "https://www.youtube.com/embed/kmFAUp7SwAs?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+            "https://www.youtube.com/embed/LGjkbsE6_5I?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+            "https://www.youtube.com/embed/9Wyf2yQCFgQ?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+            "https://www.youtube.com/embed/ZfFNVlyti_4?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+            "https://www.youtube.com/embed/pymesYfmeKc?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+            "https://www.youtube.com/embed/jm0cU4AYjSo?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+            "https://www.youtube.com/embed/sZnXEjxNExE?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF",
+          ].map((video_url) => (
+            <iframe
+              width="320"
+              height="180"
+              className={fluidCSS()
+                .btwX([300, 1000], {})
+                .end("miniatura-youtube")}
+              src={video_url}
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          ))}
+        </div>
+      </Paper>
+    );
+  }
 
   function carpeta_ejercicio(nombre) {
     return pathjoin(rootfolder, "ejercicios", nombre);
@@ -374,7 +390,7 @@ function PresentacionPlayground({
         marginBottom: "30px",
       }}
     >
-      <Typography variant="h2">
+      <Typography variant="h3">
         <b>{titulo}</b>
       </Typography>
       <br />
@@ -391,6 +407,7 @@ function PresentacionPlayground({
         </div>
         {(() => {
           const params = new URLSearchParams(window.location.search);
+          params.set("pub", pubid_ajustada(params.get("pub")));
           if (playground_id == nombre_proyecto) {
             params.delete("playground-id");
             const url_delete = `${
@@ -467,6 +484,7 @@ function PresentacionPlayground({
       </Typography>
       <br />
       <p>{descripcion}</p>
+      <br />
       <Editor_en_linea
         playground_extra_clases={""}
         nombre_proyecto={nombre_proyecto}
