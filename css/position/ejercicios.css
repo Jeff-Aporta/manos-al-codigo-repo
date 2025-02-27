@@ -40,8 +40,8 @@ html {
 }
 
 .diseño {
-  width: 150px;
-  height: 150px;
+  width: min(150px, 35vw);
+  height: min(150px, 35vw);
   position: relative;
 
   &.screen {
