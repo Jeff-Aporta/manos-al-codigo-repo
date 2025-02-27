@@ -366,7 +366,6 @@ function PresentacionPlayground({
   CSS,
   extra_js,
 }) {
-  console.log(extra_js);
   return (
     <Paper
       elevation={4}
