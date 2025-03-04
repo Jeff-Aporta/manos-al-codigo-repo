@@ -2,7 +2,8 @@ body {
   background: radial-gradient(circle at center, hsl(240, 63%, 10%), black);
 }
 
-.diseño#ejercicio-13 {
+.diseño#ejercicio-15 {
+  scale: 0.7;
   .esclerotida {
     background: white;
     border-top: 20px solid black;
