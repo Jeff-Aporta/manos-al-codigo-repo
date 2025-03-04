@@ -146,7 +146,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    font
+    font-weight: bolder;
 
     .justificacion {
       font-weight: bold;
