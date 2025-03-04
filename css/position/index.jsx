@@ -43,11 +43,11 @@ function App() {
         <hr />
         <br />
         <Paper className="pad-20px">
-          <Typography variant="h3">Sumario de clases</Typography>
+          <Typography variant="h3">Glosario de clases</Typography>
           <br />
           <hr />
           <br />
-          {hacer_sumario({
+          {hacer_glosario({
             ".diseño":
               "abre un contexto position relative para ubicar elementos.",
             ".capa":
@@ -151,9 +151,9 @@ function App() {
                     <br />
                     <hr />
                     <br />
-                    <Typography variant="h4">Sumario</Typography>
+                    <Typography variant="h4">Glosario</Typography>
                     <br />
-                    {hacer_sumario({
+                    {hacer_glosario({
                       "#detalle-1, #detalle-2":
                         "sirven de apoyo para das la ubicación a los puntos del domino azul.",
                       ".bordear-capas-en-blanco":
@@ -397,7 +397,7 @@ function App() {
   }
 }
 
-function hacer_sumario(obj) {
+function hacer_glosario(obj) {
   return Object.entries(obj).map(([k, v]) => (
     <div>
       <b className="c-skyblue">{k}</b>: {v}
@@ -507,20 +507,12 @@ function PresentacionPlayground({
             window.location.pathname
           }?${params.toString()}`;
 
-          const [estadoVentanaURL, setEstadoVentanaURL] = React.useState(false);
-
-          const abrirVentanaURL = () => {
-            navigator.clipboard.writeText(url);
-            setTimeout(cerrarVentanaURL, 15000);
-            setEstadoVentanaURL(true);
-          };
-          const cerrarVentanaURL = () => {
-            setEstadoVentanaURL(false);
-          };
-
           return [
             <Tooltip title="Copiar enlace">
-              <IconButton style={style_button} onClick={abrirVentanaURL}>
+              <IconButton
+                style={style_button}
+                onClick={() => navigator.clipboard.writeText(url)}
+              >
                 <i className="fa-solid fa-link"></i>
               </IconButton>
             </Tooltip>,
@@ -529,38 +521,6 @@ function PresentacionPlayground({
                 <i className="fa-solid fa-filter"></i>
               </IconButton>
             </Tooltip>,
-            <Dialog
-              elevation={6}
-              open={estadoVentanaURL}
-              onClose={cerrarVentanaURL}
-              fullWidth
-            >
-              <DialogTitle>URL</DialogTitle>
-              <DialogContent>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  label="URL con filtro"
-                  type="text"
-                  id="URL-con-filtro"
-                  fullWidth
-                  maxWidth="xl"
-                  variant="standard"
-                  editable="false"
-                  value={url}
-                  onClick={() => {
-                    navigator.clipboard.writeText(url);
-                    document.querySelector("#URL-con-filtro").select();
-                  }}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={cerrarVentanaURL}>Cerrar</Button>
-                <Button href={url} variant="contained">
-                  Filtrar
-                </Button>
-              </DialogActions>
-            </Dialog>,
           ];
         })()}
       </Typography>
