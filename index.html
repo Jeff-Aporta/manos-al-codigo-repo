@@ -21,17 +21,14 @@
           window["jeff-aporta-default"] = "../";
           ja = window["jeff-aporta-default"];
         }
-        var asciiurl =  ja + a;
-        const script= document.createElement("script");
+        var asciiurl = ja + a;
+        const script = document.createElement("script");
         script.src = asciiurl;
         document.write(script.outerHTML);
       }
     </script>
 
-    <script
-      type="text/javascript"
-      src=
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" async></script>
 
     <script>
       asciiMap.CLI.react_mui_fa();
@@ -59,15 +56,32 @@
         trivia: {
           root: "trivia",
           tree: (root, node) => {
-            node.js("banco");
+            let theme_ = params.get("theme") ?? "ep9";
+            switch (theme_) {
+              case "ep9":
+                params.set("theme", "00-css-basic");
+                recargar_actualizando_parametros();
+                return;
+            }
+            node.jsx(`bancos/${theme_}`);
           },
         },
       };
 
+      function recargar_actualizando_parametros() {
+        const nr = window.location.pathname + "?" + params.toString();
+        window.location.href = nr;
+        window.location.assign(nr);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      }
+
       const tree = asciiMap.tree();
 
       if (params.get("theme") && !pubid) {
-        pubid = "trivia";
+        params.set("pub", "trivia");
+        recargar_actualizando_parametros();
       }
 
       pubid = pubid_ajustada();
@@ -75,7 +89,7 @@
       if (pubid) {
         rootfolder = pub_estructura[pubid].root;
 
-        tree.css("index");
+        tree.jsxcss("index");
 
         tree.newBranch(rootfolder, (subTree) => {
           pub_estructura[pubid].tree(tree, subTree);
@@ -87,7 +101,7 @@
         window.location.href = nr;
         window.location.assign(nr);
         setTimeout(() => {
-          window.location.reload()
+          window.location.reload();
         }, 100);
       }
 

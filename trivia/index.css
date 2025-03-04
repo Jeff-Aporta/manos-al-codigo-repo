@@ -1,20 +1,80 @@
 :root {
-  --te-toca: Lavender;
-  --no-te-toca: rgba(211, 211, 211, 0.2);
+  --en-turno: Indigo;
+  --en-espera-de-turno: rgba(0, 0, 0, 0.3);
 }
 
 body,
 html {
-  background-color: midnightblue;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 95vh;
   padding: 10px 0;
   font-family: Arial, sans-serif;
+}
+
+.infinite-background-y{ 
+  animation: infinite-background-y 60s linear infinite, op 1s infinite alternate;
+}
+
+@keyframes infinite-background-y {
+  0% { background-position-y: 0; }
+  100% { background-position-y: -100vh; }
+}
+@keyframes op {
+  0% { opacity: 1 }
+  100% { opacity: 0.5 }
+}
+
+#personalizar {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  color: dodgerblue;
+}
+
+.paper {
+  border: 1px solid rgba(128, 128, 128, 0.1);
+  padding: 15px;
+  text-align: left;
+
+  &:has(.url) {
+    background-color: aliceblue;
+    margin-top: 20px;
+    & {
+      border: 4px solid dodgerblue;
+    }
+    .boton-copiar {
+      background-color: dodgerblue;
+      padding: 15px;
+      color: white;
+    }
+  }
+
+  .url {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    font-weight: bolder;
+  }
+}
+
+.contenedor-bools {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+
+  .paper {
+    width: 40%;
+  }
 }
 
 .marca {
@@ -34,7 +94,7 @@ body {
 
   transition: filter 0.3s;
 
-  &:hover{
+  &:hover {
     filter: brightness(1.5);
   }
 
@@ -45,16 +105,16 @@ body {
   }
 }
 
-.msg{
+.msg {
   color: white;
   animation: titilar 0.3s alternate infinite;
 }
 
 @keyframes titilar {
-  from{
+  from {
     filter: opacity(1);
   }
-  to{
+  to {
     filter: opacity(0.1);
   }
 }
@@ -71,12 +131,12 @@ body {
 
   .pregunta,
   .opciones > .renglon-opn > div {
-    background-color: white;
-    width: 100%;
     padding: 13px 5px;
     border-radius: 15px;
 
     text-align: center;
+
+    border: 3px solid darkblue;
   }
 
   .pregunta {
@@ -84,6 +144,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    font
+
+    .justificacion {
+      font-weight: bold;
+      color: CornflowerBlue;
+      border: 2px solid steelblue;
+      border-radius: 20px;
+      padding: 15px;
+      margin: 10px;
+    }
   }
 
   .opciones {
@@ -94,13 +166,17 @@ body {
     font-weight: bolder;
 
     .index-opn {
-      background: white;
-      border-radius: 50%;
-      aspect-ratio: 1;
-      width: 40px;
-      display: flex;
+      border-radius: 50% !important;
+      width: 45px;
+      height: 45px;
+      display: inline-flex;
       justify-content: center;
       align-items: center;
+      border: 3px solid darkcyan !important;
+    }
+
+    .opcion{
+      width: 100%;
     }
 
     & > .renglon-opn > div {
@@ -121,7 +197,6 @@ body {
 
   .index-opn {
     pointer-events: none;
-    background: plum !important;
   }
 }
 

@@ -423,7 +423,7 @@ function PresentacionPlayground({
           }
           const style_button = { color: "SlateGray" };
           params.set("playground-id", nombre_proyecto);
-          const url = `${window.location.pathname}?${params.toString()}`;
+          const url = `${window.location.origin}/${window.location.pathname}?${params.toString()}`;
 
           const [estadoVentanaURL, setEstadoVentanaURL] = React.useState(false);
 
