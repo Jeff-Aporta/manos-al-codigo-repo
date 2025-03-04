@@ -24,8 +24,7 @@ function App() {
   let indice_codemirror_contador = 0;
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <_>
       <Header />
       <div id="contenido">
         <Typography variant="h1">
@@ -302,7 +301,7 @@ function App() {
       >
         Manos al código.
       </Paper>
-    </ThemeProvider>
+    </_>
   );
 
   function AnexoBorderRadiusGen() {
@@ -403,54 +402,6 @@ function hacer_glosario(obj) {
       <b className="c-skyblue">{k}</b>: {v}
     </div>
   ));
-}
-
-function Header() {
-  return (
-    <div
-      style={{
-        background: "black",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        fontSize: "200%",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          padding: "10px",
-        }}
-      >
-        <img src="src/img/logo_128x128.png" height="60" alt="" />
-        Manos al código
-      </div>
-      <div>
-        <div style={{ padding: "10px" }}>
-          <Tooltip title="Repositorio de Manos al código" placement="bottom">
-            <IconButton
-              href="https://github.com/Jeff-Aporta/manos-al-codigo-repo"
-              target="_blank"
-              style={{ fontSize: "120%" }}
-            >
-              <i className="fa-brands fa-github" />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Podcast" placement="bottom">
-            <IconButton
-              href="https://www.youtube.com/playlist?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF"
-              target="_blank"
-              style={{ fontSize: "120%" }}
-            >
-              <i className="fa-brands fa-youtube" />
-            </IconButton>
-          </Tooltip>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function PresentacionPlayground({
@@ -554,7 +505,3 @@ function PresentacionPlayground({
     </Paper>
   );
 }
-
-setTimeout(() => {
-  ReactDOM.render(App(), document.getElementById("root"));
-});

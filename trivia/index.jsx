@@ -26,23 +26,6 @@ if (barajar_jugadores === "si") {
   participantes = participantes.sort(() => Math.random() - 0.5); // Desordenar
 }
 
-function configurar_URL(nuevos_parametros) {
-  const parametros_configurados = {};
-  for (const [key, value] of params.entries()) {
-    parametros_configurados[key] = value;
-  }
-  Object.assign(parametros_configurados, nuevos_parametros);
-  const nuevaURL =
-    `${window.location.origin}${window.location.pathname}?` +
-    Object.entries(parametros_configurados)
-      .filter(([, v]) => Boolean(v))
-      .map(([k, v]) => {
-        return `${k}=${v}`;
-      })
-      .join("&");
-  return nuevaURL;
-}
-
 function CustomUrlComponent() {
   const [jugadores, setJugadores] = React.useState([]);
   const [barajar_preguntas, setBarajarPreguntas] = React.useState("si");
@@ -53,7 +36,7 @@ function CustomUrlComponent() {
     params.get("theme") ?? "00-css-basic"
   );
 
-  const url = configurar_URL({
+  const url = generar_URL({
     theme: themeTrivia,
     "barajar-jugadores": barajar_jugadores == "si" ? "" : "no",
     barajar: barajar_preguntas == "si" ? "" : "no",
@@ -752,5 +735,3 @@ function App() {
     })();
   }
 }
-
-ReactDOM.render(<App />, document.getElementById("root"));

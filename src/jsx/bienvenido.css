@@ -1,0 +1,186 @@
+/* ================================================
+   Numeración Automática hasta Nivel 10 (CSS Nesting)
+   ================================================ */
+
+.contador {
+  counter-reset: lvl1; /* Inicia el contador de nivel 1 */
+  font-size: smaller;
+
+  li::before {
+    color: skyblue;
+  }
+
+  > li {
+    list-style-type: none;
+    counter-increment: lvl1;
+    position: relative;
+
+    &::before {
+      content: counter(lvl1) " ";
+      font-weight: bold;
+    }
+
+    > ol,
+    > ul {
+      counter-reset: lvl2; /* Prepara contador de nivel 2 */
+
+      > li {
+        list-style-type: none;
+        counter-increment: lvl2;
+        position: relative;
+
+        &::before {
+          content: counter(lvl1) "." counter(lvl2) " ";
+          font-weight: bold;
+        }
+
+        > ol,
+        > ul {
+          counter-reset: lvl3; /* Prepara contador de nivel 3 */
+
+          > li {
+            list-style-type: none;
+            counter-increment: lvl3;
+            position: relative;
+
+            &::before {
+              content: counter(lvl1) "." counter(lvl2) "." counter(lvl3) " ";
+              font-weight: bold;
+            }
+
+            > ol,
+            > ul {
+              counter-reset: lvl4; /* Nivel 4 */
+
+              > li {
+                list-style-type: none;
+                counter-increment: lvl4;
+                position: relative;
+
+                &::before {
+                  content: counter(lvl1) "." counter(lvl2) "." counter(lvl3) "."
+                    counter(lvl4) " ";
+                  font-weight: bold;
+                }
+
+                > ol,
+                > ul {
+                  counter-reset: lvl5; /* Nivel 5 */
+
+                  > li {
+                    list-style-type: none;
+                    counter-increment: lvl5;
+                    position: relative;
+
+                    &::before {
+                      content: counter(lvl1) "." counter(lvl2) "." counter(lvl3)
+                        "." counter(lvl4) "." counter(lvl5) " ";
+                      font-weight: bold;
+                    }
+
+                    > ol,
+                    > ul {
+                      counter-reset: lvl6; /* Nivel 6 */
+
+                      > li {
+                        list-style-type: none;
+                        counter-increment: lvl6;
+                        position: relative;
+
+                        &::before {
+                          content: counter(lvl1) "." counter(lvl2) "."
+                            counter(lvl3) "." counter(lvl4) "." counter(lvl5)
+                            "." counter(lvl6) " ";
+                          font-weight: bold;
+                        }
+
+                        > ol,
+                        > ul {
+                          counter-reset: lvl7; /* Nivel 7 */
+
+                          > li {
+                            list-style-type: none;
+                            counter-increment: lvl7;
+                            position: relative;
+
+                            &::before {
+                              content: counter(lvl1) "." counter(lvl2) "."
+                                counter(lvl3) "." counter(lvl4) "."
+                                counter(lvl5) "." counter(lvl6) "."
+                                counter(lvl7) " ";
+                              font-weight: bold;
+                            }
+
+                            > ol,
+                            > ul {
+                              counter-reset: lvl8; /* Nivel 8 */
+
+                              > li {
+                                list-style-type: none;
+                                counter-increment: lvl8;
+                                position: relative;
+
+                                &::before {
+                                  content: counter(lvl1) "." counter(lvl2) "."
+                                    counter(lvl3) "." counter(lvl4) "."
+                                    counter(lvl5) "." counter(lvl6) "."
+                                    counter(lvl7) "." counter(lvl8) " ";
+                                  font-weight: bold;
+                                }
+
+                                > ol,
+                                > ul {
+                                  counter-reset: lvl9; /* Nivel 9 */
+
+                                  > li {
+                                    list-style-type: none;
+                                    counter-increment: lvl9;
+                                    position: relative;
+
+                                    &::before {
+                                      content: counter(lvl1) "." counter(lvl2)
+                                        "." counter(lvl3) "." counter(lvl4) "."
+                                        counter(lvl5) "." counter(lvl6) "."
+                                        counter(lvl7) "." counter(lvl8) "."
+                                        counter(lvl9) " ";
+                                      font-weight: bold;
+                                    }
+
+                                    > ol,
+                                    > ul {
+                                      counter-reset: lvl10; /* Nivel 10 */
+
+                                      > li {
+                                        list-style-type: none;
+                                        counter-increment: lvl10;
+                                        position: relative;
+
+                                        &::before {
+                                          content: counter(lvl1) "."
+                                            counter(lvl2) "." counter(lvl3) "."
+                                            counter(lvl4) "." counter(lvl5) "."
+                                            counter(lvl6) "." counter(lvl7) "."
+                                            counter(lvl8) "." counter(lvl9) "."
+                                            counter(lvl10) " ";
+                                          font-weight: bold;
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
