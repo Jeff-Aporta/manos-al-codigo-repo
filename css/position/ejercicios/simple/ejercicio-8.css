@@ -1,30 +1,28 @@
-body{
+body {
   background: white;
 }
 
-.diseño {
-  &#ejercicio-8 {
-    .capa {
-      border: 7px solid white;
-      cursor: pointer;
+.diseño#ejercicio-8 {
+  .capa {
+    border: 7px solid white;
+    cursor: pointer;
+  }
+  #marco-interno,
+  #fondo {
+    border-radius: 25%;
+  }
+  #marco-interno {
+    --escala: 0.65;
+    #AF {
+      --escala: 0;
+      top: 10px;
+      right: 10px;
     }
-    #marco-interno,
-    #fondo {
-      border-radius: 25%;
-    }
-    #marco-interno {
-      --escala: 0.65;
-      #AF {
-        --escala: 0;
-        top: 10px;
-        right: 10px;
-      }
-    }
-    #lente {
-      --escala: 0.3;
-    }
-    #fondo {
-      background: purple;
-    }
+  }
+  #lente {
+    --escala: 0.3;
+  }
+  #fondo {
+    background: purple;
   }
 }

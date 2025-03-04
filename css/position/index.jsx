@@ -236,13 +236,93 @@ function App() {
             carpeta_ejercicio("complex")
           );
         })()}
+        {(() => {
+          return listarEjercicios(
+            [
+              {
+                filename: "ejercicio-13",
+                titulo: `Sharingan`,
+                descripcion: (
+                  <_>
+                    Primeramente enfocamos nuestra atención en la parte central
+                    del ojo: la pupila. Utilizamos propiedades de CSS como
+                    bordes circulares, gradientes y transformaciones para
+                    reproducir los detalles rojos y el distintivo patrón del
+                    Sharingan, sin incluir la esclerótica ni otras partes.
+                  </_>
+                ),
+              },
+              {
+                filename: "ejercicio-14",
+                titulo: `Sharingan contorno ojo`,
+                descripcion: (
+                  <_>
+                    Aquí incorporamos la esclerótica —la zona blanca— y unas
+                    pestañas que enmarcan la pupila Sharingan. Ajustamos el
+                    tamaño, el posicionamiento y el color de fondo en CSS. Para
+                    dar forma a las pestañas, manipulamos el grosor de los
+                    bordes y utilizamos un border-radius de 57% 43% 59% 41% /
+                    90% 0% 100% 10%, lo que nos permite lograr una apariencia
+                    más completa del ojo.
+                    <br />
+                    <br />
+                    <AnexoBorderRadiusGen />
+                  </_>
+                ),
+              },
+              {
+                filename: "ejercicio-15",
+                titulo: `Sharingan dos ojos`,
+                descripcion: (
+                  <_>
+                    Duplicamos los elementos creados para simular dos ojos
+                    Sharingan. Esto incluye la pupila con su patrón único,
+                    además de la esclerótica y las pestañas en cada ojo. Para
+                    obtener un diseño equilibrado, asignamos un fondo radial con
+                    tonalidades azules característicos del clan Uchiha, creando
+                    un ambiente más acorde con la temática. Como detalle
+                    adicional, añadimos dos brillos circulares en las pupilas
+                    para realzar aún más el efecto final.
+                    <br />
+                    <br />
+                    <AnexoBorderRadiusGen />
+                  </_>
+                ),
+              },
+            ],
+            carpeta_ejercicio("simple")
+          );
+        })()}
       </div>
       <br />
-      <Paper elevation={6} className="pad-20px d-flex jc-end ai-end fs-150p" style={{ height: "400px" }}>
+      <Paper
+        elevation={6}
+        className="pad-20px d-flex jc-end ai-end fs-150p"
+        style={{ height: "400px" }}
+      >
         Manos al código.
       </Paper>
     </ThemeProvider>
   );
+
+  function AnexoBorderRadiusGen() {
+    return (
+      <Paper style={{ padding: "20px" }}>
+        Para profundizar en la personalización de la forma que contornea los
+        ojos y sus pestañas, se recomienda visitar la herramienta en línea
+        <br />
+        <br />
+        <Link href="https://9elements.github.io/fancy-border-radius/">
+          <b>Fancy Border Radius Generator</b>{" "}
+          <small>(https://9elements.github.io/fancy-border-radius/)</small>
+        </Link>
+        <br />
+        <br />
+        la cual permite manipular fácilmente las curvas de los bordes
+        (border-radius) y visualizar los cambios en tiempo real.
+      </Paper>
+    );
+  }
 
   function VideosRelacionados() {
     if (playground_id) {
@@ -423,7 +503,9 @@ function PresentacionPlayground({
           }
           const style_button = { color: "SlateGray" };
           params.set("playground-id", nombre_proyecto);
-          const url = `${window.location.origin}/${window.location.pathname}?${params.toString()}`;
+          const url = `${window.location.origin}/${
+            window.location.pathname
+          }?${params.toString()}`;
 
           const [estadoVentanaURL, setEstadoVentanaURL] = React.useState(false);
 

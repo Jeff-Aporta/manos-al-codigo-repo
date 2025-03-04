@@ -1,0 +1,55 @@
+body {
+  background: hsl(240, 64%, 10%);
+}
+
+.diseño#ejercicio-13 {
+  .roja {
+    width: 150px;
+    height: 150px;
+    left: 30px;
+    top: -5px;
+    background: radial-gradient(
+        circle at center,
+        black,
+        rgba(0, 0, 0, 0.5) 10%,
+        transparent 30%
+      ),
+      linear-gradient(to top left, rgb(80, 0, 0), crimson, Red);
+    overflow: hidden;
+
+    .brillo {
+      background: radial-gradient(
+          circle at bottom right,
+          transparent 20%,
+          white 90%
+        ),
+        radial-gradient(
+          circle at 0% 30%,
+          white,
+          rgba(255, 255, 255, 0.5) 40%,
+          transparent 45%
+        );
+      --escala: 1.5;
+    }
+
+    .texto {
+      font-size: 120px;
+      font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    }
+    #iris {
+      --escala: 0.53;
+      border: 3px solid black;
+    }
+    #pupila {
+      width: 10px;
+      height: 10px;
+    }
+    .rotar180 {
+      rotate: 180deg;
+    }
+    .rotar120 {
+      rotate: 120deg;
+    }
+  }
+}

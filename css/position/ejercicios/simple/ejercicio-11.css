@@ -1,4 +1,5 @@
 body{
+  /* Con respecto al 10, este es el único cambio */
   background: radial-gradient(
     circle at center,
     white 35%,
@@ -9,12 +10,10 @@ body{
   );
 }
 
-.diseño {
-  &#ejercicio-10 {
+.diseño#ejercicio-11 {
     .marco {
       --escala: 1.3;
       border-top: 3px solid darkred;
       overflow: hidden;
     }
-  }
 }

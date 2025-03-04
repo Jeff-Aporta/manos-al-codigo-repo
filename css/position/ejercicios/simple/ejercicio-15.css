@@ -1,0 +1,99 @@
+body {
+  background: radial-gradient(circle at center, hsl(240, 63%, 10%), black);
+}
+
+.diseño#ejercicio-13 {
+  .esclerotida {
+    background: white;
+    border-top: 20px solid black;
+    border-right: 20px solid black;
+    border-bottom: 5px solid black;
+    border-left: 1px solid black;
+    border-radius: 57% 43% 59% 41% / 90% 0% 100% 10%;
+    width: 160%;
+    height: 80%;
+    overflow: hidden;
+
+    &#izquierdo{
+      transform: translateX(-110%) scaleX(-1);
+      .roja{
+        transform:  scaleX(-1);
+      }
+    }
+
+    &#derecho{
+      transform: translateX(60%);
+      .blanca{
+        opacity: 0.3;
+      }
+    }
+
+    .roja {
+      width: 125px;
+      height: 125px;
+      top: -15px;
+      left: 40px;
+      border: 5px solid black;
+      border-right-width: 10px;
+      background: radial-gradient(
+          circle at center,
+          black,
+          rgba(0, 0, 0, 0.5) 10%,
+          transparent 30%
+        ),
+        linear-gradient(to top left, rgb(80, 0, 0), crimson, Red);
+
+      mix-blend-mode: multiply;
+
+      .blanca{
+        opacity: 0.5;
+      }
+
+      #detalle-1{
+        --escala: 0.2;
+        left: 80%;
+        top: 20%;
+      }
+      #detalle-2{
+        --escala: 0.1;
+        left: 65%;
+        top: 35%;
+      }
+
+      .brillo {
+        background: radial-gradient(
+            circle at bottom right,
+            transparent 20%,
+            white 90%
+          ),
+          radial-gradient(
+            circle at 0% 30%,
+            white,
+            rgba(255, 255, 255, 0.5) 40%,
+            transparent 45%
+          );
+        --escala: 1.5;
+      }
+
+      .texto {
+        font-size: 120px;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      #iris {
+        --escala: 0.53;
+        border: 3px solid black;
+      }
+      #pupila {
+        width: 10px;
+        height: 10px;
+      }
+      .rotar180 {
+        rotate: 180deg;
+      }
+      .rotar120 {
+        rotate: 120deg;
+      }
+    }
+  }
+}

@@ -1,16 +1,14 @@
-body{
+body {
   background: linear-gradient(hsl(207, 100%, 30%), deepskyblue);
 }
 
-.diseño {
-  &#ejercicio-7 {
-    .roja {
-      --escala: 1.5;
-    }
-    .azul {
-      background: mediumblue;
-      color: white;
-      padding: 5px 10px;
-    }
+.diseño#ejercicio-7 {
+  .roja {
+    --escala: 1.5;
+  }
+  .azul {
+    background: mediumblue;
+    color: white;
+    padding: 5px 10px;
   }
 }
