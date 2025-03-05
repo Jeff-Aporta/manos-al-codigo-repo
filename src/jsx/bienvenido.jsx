@@ -348,7 +348,7 @@ function IndiceTemas() {
                   rel="noopener noreferrer"
                   underline="hover"
                 >
-                  Ver video (EP05)
+                  Video (EP05)
                 </Link>
               </li>
               <li>
@@ -359,7 +359,7 @@ function IndiceTemas() {
                   rel="noopener noreferrer"
                   underline="hover"
                 >
-                  Ver video (EP06)
+                  Video (EP06)
                 </Link>
               </li>
             </ul>
@@ -373,7 +373,7 @@ function IndiceTemas() {
                   rel="noopener noreferrer"
                   underline="hover"
                 >
-                  Ver video (EP07)
+                  Video (EP07)
                 </Link>
               </li>
               <li>
@@ -384,7 +384,7 @@ function IndiceTemas() {
                   rel="noopener noreferrer"
                   underline="hover"
                 >
-                  Ver video (EP08)
+                  Video (EP08)
                 </Link>
               </li>
               <li>
@@ -395,7 +395,7 @@ function IndiceTemas() {
                   rel="noopener noreferrer"
                   underline="hover"
                 >
-                  Ver video (EP09)
+                  Video (EP09)
                 </Link>
                 {" | "}
                 <Link
@@ -426,7 +426,7 @@ function IndiceTemas() {
               </ul>
               <ul>
                 <li>
-                  Videos podcast:
+                  Videos:
                   <ul>
                     {(() =>
                       [
@@ -478,10 +478,23 @@ function IndiceTemas() {
                 </li>
               </ul>
             </ul>
-          </ul>
-          <ul>
             <li>✅ Introducción a Flexbox y Grid.</li>
-            <li>⬜ Diseño responsivo (media queries).</li>
+            <li>
+              ⬜ Diseño responsivo (media queries).
+              <ul>
+                <li>
+                  Introducción a{" "}
+                  <Link
+                    href="https://jeff-aporta.github.io/fluid-css/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    underline="hover"
+                  >
+                    fluidCSS.js
+                  </Link>
+                </li>
+              </ul>
+            </li>
           </ul>
         </li>
       );
@@ -524,7 +537,7 @@ function IndiceTemas() {
                 rel="noopener noreferrer"
                 underline="hover"
               >
-                Ver video (EP02)
+                Video (EP02)
               </Link>
             </li>
             <li>
@@ -535,7 +548,7 @@ function IndiceTemas() {
                 rel="noopener noreferrer"
                 underline="hover"
               >
-                Ver video (EP03)
+                Video (EP03)
               </Link>
             </li>
             <li>
@@ -550,7 +563,7 @@ function IndiceTemas() {
                 rel="noopener noreferrer"
                 underline="hover"
               >
-                Ver video (EP04)
+                Video (EP04)
               </Link>
             </li>
           </ul>
