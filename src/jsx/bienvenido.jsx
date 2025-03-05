@@ -753,7 +753,6 @@ function IndiceTemas() {
               },
               false
             )}
-            target="_blank"
             underline="hover"
           >
             Ejercicio {n}
