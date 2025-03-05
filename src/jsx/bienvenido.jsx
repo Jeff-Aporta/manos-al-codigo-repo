@@ -112,7 +112,7 @@ function App() {
           .lerpX(400, 800, {
             fontSize: [25, 30],
           })
-          .end("backdrop-bright-hover-2")}
+          .end()}
       >
         <BotonUnirse
           icon={<i className="fa-brands fa-youtube" />}
