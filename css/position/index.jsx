@@ -294,13 +294,7 @@ function App() {
         })()}
       </div>
       <br />
-      <Paper
-        elevation={6}
-        className="pad-20px d-flex jc-end ai-end fs-150p"
-        style={{ height: "400px" }}
-      >
-        Manos al código.
-      </Paper>
+      <Footer/>
     </_>
   );
 

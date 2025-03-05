@@ -1,28 +1,228 @@
+JS2CSS.insertStyle({
+  id: "body-multicolor",
+  objJs: {
+    ".app": {
+      background: `${(() => {
+        let str = [];
+        const tono_inicial = 240;
+        const iteraciones = 5;
+        const saltos_entre_angulos = 30;
+        const radio = 800;
+        const desface_y = 300;
+        for (let i = 0; i < iteraciones; i++) {
+          str.push(`radial-gradient(
+            circle at ${i % 2 == 1 ? "90%" : "10%"} ${i * 1500 - desface_y}px,
+            hsla(${tono_inicial + i * saltos_entre_angulos}, 100%, 50%, 0.3),
+            transparent ${radio}px
+          )`);
+        }
+        for (let i = 0; i < iteraciones; i++) {
+          str.push(`radial-gradient(
+          circle at ${i % 2 == 0 ? "90%" : "10%"} ${i * 1300 + desface_y}px,
+          hsla(${
+            tono_inicial + i * saltos_entre_angulos - 2 * saltos_entre_angulos
+          }, 100%, 50%, 0.3),
+          transparent ${radio}px
+        )`);
+        }
+        str = str.join(",");
+        console.log(str);
+        return str;
+      })()}`,
+    },
+  },
+});
+
 function App() {
   return (
     <_>
-      <Header />
-      <IndiceTemas />
+      <div className="app">
+        <Header />
+        <BannerInicial />
+        <hr />
+        <IndiceTemas />
+        <Footer />
+      </div>
     </_>
+  );
+
+  function BannerInicial() {
+    return (
+      <div
+        style={{
+          minHeight: "70vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          textAlign: "center",
+          padding: "70px",
+        }}
+      >
+        <Typography variant="h2">
+          <b>
+            Proyecto educativo{" "}
+            <span style={{ color: "RoyalBlue" }}>En línea</span>
+          </b>
+        </Typography>
+        <br />
+        <Typography
+          variant="h5"
+          color="secondary"
+          className={fluidCSS()
+            .ltX(500, {
+              fontSize: "small",
+            })
+            .end()}
+        >
+          Entusiastas y profesionales del desarrollo de software se reúnen en
+          <br />
+          <br />
+          <b style={{ textTransform: "uppercase", color: "deepskyblue" }}>
+            Manos al código | Colectivo en acción
+          </b>
+        </Typography>
+        <br />
+        <br />
+        <Typography
+          variant="h4"
+          className={fluidCSS()
+            .ltX(500, {
+              display: "none",
+            })
+            .end()}
+        >
+          Es gratis <i className="fa-solid fa-thumbs-up" />
+        </Typography>
+        <br />
+        <BotonesUnirse />
+      </div>
+    );
+  }
+
+  function BotonesUnirse() {
+    return (
+      <div
+        style={{
+          width: "min(350px, 100%)",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+        className={fluidCSS()
+          .lerpX(400, 800, {
+            fontSize: [25, 30],
+          })
+          .end("backdrop-bright-hover-2")}
+      >
+        <BotonUnirse
+          icon={<i className="fa-brands fa-youtube" />}
+          href="https://www.youtube.com/playlist?list=PLHijG0kpWet092PQS2aRaj0CFzYiDMTqF"
+        >
+          Podcast
+        </BotonUnirse>
+        <BotonUnirse
+          icon={<i className="fa-brands fa-github" />}
+          href="https://github.com/Jeff-Aporta/manos-al-codigo-repo"
+        >
+          Repositorio
+        </BotonUnirse>
+        <BotonUnirse
+          icon={<i className="fa-brands fa-telegram" />}
+          href="https://t.me/manos_al_codigo"
+        >
+          Grupo
+        </BotonUnirse>
+      </div>
+    );
+  }
+
+  function BotonUnirse({ href, icon, children }) {
+    return (
+      <Link
+        style={{
+          width: "30%",
+          cursor: "pointer",
+          border: "1px solid rgba(70, 130, 180, 0.4)",
+          padding: "10px",
+          borderRadius: "10px",
+        }}
+        color="inherit"
+        underline="none"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="backdrop-bright-hover-2"
+      >
+        {icon}
+        <span
+          style={{ fontSize: "40%", whiteSpace: "nowrap" }}
+          className={fluidCSS()
+            .ltX(450, {
+              display: "none",
+            })
+            .end()}
+        >
+          <br />
+          {children}
+        </span>
+      </Link>
+    );
+  }
+}
+
+function PaperList(props) {
+  return (
+    <Paper
+      {...props}
+      className={fluidCSS()
+        .lerpX(400, 800, {
+          padding: [5, 20],
+        })
+        .end()}
+    />
+  );
+}
+
+function PaperBody(props) {
+  return (
+    <Paper
+      {...props}
+      className={fluidCSS()
+        .lerpX(320, 500, {
+          margin: [0, 20],
+          padding: [10, 20],
+        })
+        .end(props.className)}
+    />
   );
 }
 
 function IndiceTemas() {
   return (
     <ol className="contador">
-      <Fundamentos />
-      <FrontendDeveloper />
-      <BackendDeveloper />
+      <PaperBody>
+        <Fundamentos />
+      </PaperBody>
+      <PaperBody>
+        <FrontendDeveloper />
+      </PaperBody>
+      <PaperBody>
+        <BackendDeveloper />
+      </PaperBody>
     </ol>
   );
 
   function Fundamentos() {
     return (
       <li>
-        Fundamentos del Desarrollo Web
+        <Typography variant="h4">Fundamentos del Desarrollo Web</Typography>
+        <hr />
+        <br />
         <ol>
           {HTML()}
+          <br />
           {CSS()}
+          <br />
           {JS()}
         </ol>
       </li>
@@ -31,300 +231,309 @@ function IndiceTemas() {
     function JS() {
       return (
         <li>
-          JavaScript
+          <Typography variant="h5">JavaScript</Typography>
+          <hr />
+          <br />
           <ol>
-            <li>
-              Fundamentos Básicos de JavaScript
-              <ol>
-                <li>
-                  Sintaxis Básica
-                  <ul>
-                    <li>
-                      ⬜ Variables: <code>var</code>, <code>let</code>,{" "}
-                      <code>const</code>
-                    </li>
-                    <li>
-                      ⬜ Tipos de datos: cadenas de texto, números, booleanos,{" "}
-                      <code>null</code>, <code>undefined</code>,{" "}
-                      <code>symbol</code>
-                    </li>
-                    <li>
-                      ⬜ Operadores: aritméticos, lógicos, de comparación,
-                      ternarios
-                    </li>
-                    <li>
-                      ⬜ Estructuras de control: <code>if</code>,{" "}
-                      <code>else</code>, <code>switch</code>, <code>while</code>
-                      , <code>for</code>, <code>for...of</code>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  Funciones
-                  <ul>
-                    <li>
-                      ⬜ Declaración de funciones y expresión de funciones
-                    </li>
-                    <li>⬜ Parámetros y argumentos</li>
-                    <li>
-                      ⬜ Funciones anónimas y funciones flecha (
-                      <em>arrow functions</em>)
-                    </li>
-                    <li>
-                      ⬜ Alcance (<em>scope</em>) y cierre (<em>closures</em>)
-                    </li>
-                  </ul>
-                </li>
-                {/* 1.5.1.3 Estructuras de Datos */}
-                <li>
-                  Estructuras de Datos
-                  <ul>
-                    <li>
-                      ⬜ Arrays: creación, acceso, métodos comunes (push, pop,
-                      shift, unshift, map, filter, reduce)
-                    </li>
-                    <li>⬜ Objetos: creación, acceso, y manipulación</li>
-                    <li>⬜ Métodos de arrays como forEach, find, includes</li>
-                  </ul>
-                </li>
+            <PaperList elevation={0}>
+              <li>
+                Fundamentos Básicos de JavaScript
+                <ol>
+                  <li>
+                    Sintaxis Básica
+                    <ul>
+                      <li>
+                        ⬜ Variables: <code>var</code>, <code>let</code>,{" "}
+                        <code>const</code>
+                      </li>
+                      <li>
+                        ⬜ Tipos de datos: cadenas de texto, números, booleanos,{" "}
+                        <code>null</code>, <code>undefined</code>,{" "}
+                        <code>symbol</code>
+                      </li>
+                      <li>
+                        ⬜ Operadores: aritméticos, lógicos, de comparación,
+                        ternarios
+                      </li>
+                      <li>
+                        ⬜ Estructuras de control: <code>if</code>,{" "}
+                        <code>else</code>, <code>switch</code>,{" "}
+                        <code>while</code>, <code>for</code>,{" "}
+                        <code>for...of</code>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Funciones
+                    <ul>
+                      <li>
+                        ⬜ Declaración de funciones y expresión de funciones
+                      </li>
+                      <li>⬜ Parámetros y argumentos</li>
+                      <li>
+                        ⬜ Funciones anónimas y funciones flecha (
+                        <em>arrow functions</em>)
+                      </li>
+                      <li>
+                        ⬜ Alcance (<em>scope</em>) y cierre (<em>closures</em>)
+                      </li>
+                    </ul>
+                  </li>
+                  {/* 1.5.1.3 Estructuras de Datos */}
+                  <li>
+                    Estructuras de Datos
+                    <ul>
+                      <li>
+                        ⬜ Arrays: creación, acceso, métodos comunes (push, pop,
+                        shift, unshift, map, filter, reduce)
+                      </li>
+                      <li>⬜ Objetos: creación, acceso, y manipulación</li>
+                      <li>⬜ Métodos de arrays como forEach, find, includes</li>
+                    </ul>
+                  </li>
 
-                {/* 1.5.1.4 Manipulación del DOM */}
-                <li>
-                  Manipulación del DOM
-                  <ul>
-                    <li>
-                      ⬜ Seleccionar y modificar elementos (getElementById,
-                      querySelector)
-                    </li>
-                    <li>⬜ Cambiar texto, atributos y estilos</li>
-                    <li>⬜ Crear y eliminar elementos</li>
-                    <li>⬜ Event listeners básicos</li>
-                  </ul>
-                </li>
+                  {/* 1.5.1.4 Manipulación del DOM */}
+                  <li>
+                    Manipulación del DOM
+                    <ul>
+                      <li>
+                        ⬜ Seleccionar y modificar elementos (getElementById,
+                        querySelector)
+                      </li>
+                      <li>⬜ Cambiar texto, atributos y estilos</li>
+                      <li>⬜ Crear y eliminar elementos</li>
+                      <li>⬜ Event listeners básicos</li>
+                    </ul>
+                  </li>
 
-                {/* 1.5.1.5 Introducción a las Herramientas de Desarrollo */}
-                <li>
-                  Introducción a las Herramientas de Desarrollo
-                  <ul>
-                    <li>⬜ Consola del navegador</li>
-                    <li>⬜ Depuración en el navegador (breakpoints)</li>
-                    <li>⬜ Uso básico de console.log</li>
-                  </ul>
-                </li>
+                  {/* 1.5.1.5 Introducción a las Herramientas de Desarrollo */}
+                  <li>
+                    Introducción a las Herramientas de Desarrollo
+                    <ul>
+                      <li>⬜ Consola del navegador</li>
+                      <li>⬜ Depuración en el navegador (breakpoints)</li>
+                      <li>⬜ Uso básico de console.log</li>
+                    </ul>
+                  </li>
 
-                {/* 1.5.2 Asincronía y Funciones Avanzadas */}
-                <li>
-                  Asincronía y Funciones Avanzadas
-                  <ol>
-                    <li>
-                      Asincronía y Promesas
-                      <ul>
-                        <li>⬜ setTimeout y setInterval</li>
-                        <li>⬜ Promesas: creación, then, catch, finally</li>
-                        <li>⬜ async/await</li>
-                        <li>⬜ Manejo de errores con try/catch</li>
-                        <li>⬜ Promise.all y Promise.race</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Manipulación Avanzada del DOM
-                      <ul>
-                        <li>
-                          ⬜ Manipulación de clases: classList, add, remove,
-                          toggle
-                        </li>
-                        <li>⬜ Crear eventos personalizados</li>
-                        <li>⬜ Delegación de eventos</li>
-                        <li>
-                          ⬜ event.preventDefault() y event.stopPropagation()
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      Desarrollo Orientado a Objetos (OOP)
-                      <ul>
-                        <li>⬜ Clases en JavaScript</li>
-                        <li>⬜ Herencia, métodos y propiedades de clases</li>
-                        <li>⬜ Encapsulamiento, polimorfismo y abstracción</li>
-                        <li>⬜ Uso de this, super y constructor</li>
-                      </ul>
-                    </li>
-                  </ol>
-                </li>
+                  {/* 1.5.2 Asincronía y Funciones Avanzadas */}
+                  <li>
+                    Asincronía y Funciones Avanzadas
+                    <ol>
+                      <li>
+                        Asincronía y Promesas
+                        <ul>
+                          <li>⬜ setTimeout y setInterval</li>
+                          <li>⬜ Promesas: creación, then, catch, finally</li>
+                          <li>⬜ async/await</li>
+                          <li>⬜ Manejo de errores con try/catch</li>
+                          <li>⬜ Promise.all y Promise.race</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Manipulación Avanzada del DOM
+                        <ul>
+                          <li>
+                            ⬜ Manipulación de clases: classList, add, remove,
+                            toggle
+                          </li>
+                          <li>⬜ Crear eventos personalizados</li>
+                          <li>⬜ Delegación de eventos</li>
+                          <li>
+                            ⬜ event.preventDefault() y event.stopPropagation()
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        Desarrollo Orientado a Objetos (OOP)
+                        <ul>
+                          <li>⬜ Clases en JavaScript</li>
+                          <li>⬜ Herencia, métodos y propiedades de clases</li>
+                          <li>
+                            ⬜ Encapsulamiento, polimorfismo y abstracción
+                          </li>
+                          <li>⬜ Uso de this, super y constructor</li>
+                        </ul>
+                      </li>
+                    </ol>
+                  </li>
 
-                {/* 1.5.3 API y Gestión del Estado */}
-                <li>
-                  API y Gestión del Estado
-                  <ol>
-                    <li>
-                      Manejo de API y AJAX
-                      <ul>
-                        <li>⬜ Uso de fetch para hacer solicitudes HTTP</li>
-                        <li>⬜ Promesas con fetch</li>
-                        <li>⬜ Enviar datos con POST, PUT, DELETE</li>
-                        <li>⬜ Manejo de datos en formato JSON</li>
-                        <li>⬜ Introducción a las API RESTful</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Patrones de Diseño Comunes
-                      <ul>
-                        <li>⬜ Módulo</li>
-                        <li>⬜ Factory</li>
-                        <li>⬜ Singleton</li>
-                      </ul>
-                    </li>
-                  </ol>
-                </li>
+                  {/* 1.5.3 API y Gestión del Estado */}
+                  <li>
+                    API y Gestión del Estado
+                    <ol>
+                      <li>
+                        Manejo de API y AJAX
+                        <ul>
+                          <li>⬜ Uso de fetch para hacer solicitudes HTTP</li>
+                          <li>⬜ Promesas con fetch</li>
+                          <li>⬜ Enviar datos con POST, PUT, DELETE</li>
+                          <li>⬜ Manejo de datos en formato JSON</li>
+                          <li>⬜ Introducción a las API RESTful</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Patrones de Diseño Comunes
+                        <ul>
+                          <li>⬜ Módulo</li>
+                          <li>⬜ Factory</li>
+                          <li>⬜ Singleton</li>
+                        </ul>
+                      </li>
+                    </ol>
+                  </li>
 
-                {/* 1.5.4 Herramientas y Buenas Prácticas */}
-                <li>
-                  Herramientas y Buenas Prácticas
-                  <ol>
-                    <li>
-                      Frameworks y Librerías JavaScript
-                      <ul>
-                        <li>
-                          ⬜ Introducción a React:
-                          <ul>
-                            <li>⬜ Componentes</li>
-                            <li>⬜ Props y estado</li>
-                            <li>⬜ Hooks (useState, useEffect)</li>
-                            <li>⬜ Context API</li>
-                          </ul>
-                        </li>
-                        <li>⬜ Otras librerías populares: Vue.js, Angular</li>
-                        <li>
-                          ⬜ Redux: gestión del estado global en aplicaciones
-                          React
-                        </li>
-                        <li>⬜ Vuex: gestión del estado en Vue.js</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Transpilers y Herramientas de Construcción
-                      <ul>
-                        <li>⬜ Introducción a Babel: convertir ES6 a ES5</li>
-                        <li>
-                          ⬜ Webpack: empaquetado de módulos, configuración
-                          básica
-                        </li>
-                        <li>
-                          ⬜ Parcel o Vite como alternativas más sencillas
-                        </li>
-                        <li>
-                          ⬜ ESLint y Prettier para mejorar la calidad del
-                          código
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      Pruebas
-                      <ul>
-                        <li>
-                          ⬜ Test unitarios: uso de Jest o Mocha para escribir
-                          pruebas automáticas
-                        </li>
-                        <li>⬜ Pruebas de integración y pruebas funcionales</li>
-                        <li>⬜ Testing Library para React</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Optimización y Rendimiento
-                      <ul>
-                        <li>
-                          ⬜ Técnicas de optimización: lazy loading, code
-                          splitting
-                        </li>
-                        <li>
-                          ⬜ Mejoras en el rendimiento del renderizado con React
-                          (React.memo, useMemo)
-                        </li>
-                        <li>
-                          ⬜ Herramientas para medir el rendimiento del
-                          navegador
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                </li>
+                  {/* 1.5.4 Herramientas y Buenas Prácticas */}
+                  <li>
+                    Herramientas y Buenas Prácticas
+                    <ol>
+                      <li>
+                        Frameworks y Librerías JavaScript
+                        <ul>
+                          <li>
+                            ⬜ Introducción a React:
+                            <ul>
+                              <li>⬜ Componentes</li>
+                              <li>⬜ Props y estado</li>
+                              <li>⬜ Hooks (useState, useEffect)</li>
+                              <li>⬜ Context API</li>
+                            </ul>
+                          </li>
+                          <li>⬜ Otras librerías populares: Vue.js, Angular</li>
+                          <li>
+                            ⬜ Redux: gestión del estado global en aplicaciones
+                            React
+                          </li>
+                          <li>⬜ Vuex: gestión del estado en Vue.js</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Transpilers y Herramientas de Construcción
+                        <ul>
+                          <li>⬜ Introducción a Babel: convertir ES6 a ES5</li>
+                          <li>
+                            ⬜ Webpack: empaquetado de módulos, configuración
+                            básica
+                          </li>
+                          <li>
+                            ⬜ Parcel o Vite como alternativas más sencillas
+                          </li>
+                          <li>
+                            ⬜ ESLint y Prettier para mejorar la calidad del
+                            código
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        Pruebas
+                        <ul>
+                          <li>
+                            ⬜ Test unitarios: uso de Jest o Mocha para escribir
+                            pruebas automáticas
+                          </li>
+                          <li>
+                            ⬜ Pruebas de integración y pruebas funcionales
+                          </li>
+                          <li>⬜ Testing Library para React</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Optimización y Rendimiento
+                        <ul>
+                          <li>
+                            ⬜ Técnicas de optimización: lazy loading, code
+                            splitting
+                          </li>
+                          <li>
+                            ⬜ Mejoras en el rendimiento del renderizado con
+                            React (React.memo, useMemo)
+                          </li>
+                          <li>
+                            ⬜ Herramientas para medir el rendimiento del
+                            navegador
+                          </li>
+                        </ul>
+                      </li>
+                    </ol>
+                  </li>
 
-                {/* 1.5.5 Arquitectura y Gestión de Proyectos */}
-                <li>
-                  Arquitectura y Gestión de Proyectos
-                  <ol>
-                    <li>
-                      Patrones de Diseño Avanzados
-                      <ul>
-                        <li>⬜ MVC (Modelo-Vista-Controlador)</li>
-                        <li>⬜ Observer y Publisher-Subscriber</li>
-                        <li>⬜ Factory y Abstract Factory</li>
-                        <li>⬜ Decorator y Adapter</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Arquitectura de Aplicaciones
-                      <ul>
-                        <li>⬜ Microservicios y aplicaciones distribuidas</li>
-                        <li>
-                          ⬜ Arquitectura serverless con funciones de AWS Lambda
-                          o Google Cloud Functions
-                        </li>
-                        <li>
-                          ⬜ Diseño de APIs escalables y versionado de APIs
-                        </li>
-                        <li>⬜ GraphQL y cómo utilizarlo en lugar de REST</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Escalabilidad y Seguridad
-                      <ul>
-                        <li>
-                          ⬜ Patrones de arquitectura para aplicaciones
-                          escalables
-                        </li>
-                        <li>
-                          ⬜ Seguridad en el desarrollo de aplicaciones: CORS,
-                          protección de datos sensibles, manejo de autenticación
-                          (OAuth, JWT)
-                        </li>
-                        <li>
-                          ⬜ Mejores prácticas para la prevención de
-                          vulnerabilidades (XSS, CSRF)
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      Liderazgo y Gestión de Proyectos
-                      <ul>
-                        <li>
-                          ⬜ Code reviews y mentoría de otros desarrolladores
-                        </li>
-                        <li>
-                          ⬜ Desarrollo ágil con metodologías Scrum o Kanban
-                        </li>
-                        <li>⬜ Gestión de equipos y estimación de tareas</li>
-                        <li>⬜ Creación de documentación clara y completa</li>
-                      </ul>
-                    </li>
-                    <li>
-                      Contribuciones a la Comunidad
-                      <ul>
-                        <li>⬜ Contribuir a proyectos de código abierto</li>
-                        <li>
-                          ⬜ Participación en foros y comunidades
-                          (StackOverflow, GitHub, Twitter)
-                        </li>
-                        <li>
-                          ⬜ Publicación de artículos o tutoriales sobre
-                          JavaScript
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                </li>
-              </ol>
-            </li>
+                  {/* 1.5.5 Arquitectura y Gestión de Proyectos */}
+                  <li>
+                    Arquitectura y Gestión de Proyectos
+                    <ol>
+                      <li>
+                        Patrones de Diseño Avanzados
+                        <ul>
+                          <li>⬜ MVC (Modelo-Vista-Controlador)</li>
+                          <li>⬜ Observer y Publisher-Subscriber</li>
+                          <li>⬜ Factory y Abstract Factory</li>
+                          <li>⬜ Decorator y Adapter</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Arquitectura de Aplicaciones
+                        <ul>
+                          <li>⬜ Microservicios y aplicaciones distribuidas</li>
+                          <li>
+                            ⬜ Arquitectura serverless con funciones de AWS
+                            Lambda o Google Cloud Functions
+                          </li>
+                          <li>
+                            ⬜ Diseño de APIs escalables y versionado de APIs
+                          </li>
+                          <li>⬜ GraphQL y cómo utilizarlo en lugar de REST</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Escalabilidad y Seguridad
+                        <ul>
+                          <li>
+                            ⬜ Patrones de arquitectura para aplicaciones
+                            escalables
+                          </li>
+                          <li>
+                            ⬜ Seguridad en el desarrollo de aplicaciones: CORS,
+                            protección de datos sensibles, manejo de
+                            autenticación (OAuth, JWT)
+                          </li>
+                          <li>
+                            ⬜ Mejores prácticas para la prevención de
+                            vulnerabilidades (XSS, CSRF)
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        Liderazgo y Gestión de Proyectos
+                        <ul>
+                          <li>
+                            ⬜ Code reviews y mentoría de otros desarrolladores
+                          </li>
+                          <li>
+                            ⬜ Desarrollo ágil con metodologías Scrum o Kanban
+                          </li>
+                          <li>⬜ Gestión de equipos y estimación de tareas</li>
+                          <li>⬜ Creación de documentación clara y completa</li>
+                        </ul>
+                      </li>
+                      <li>
+                        Contribuciones a la Comunidad
+                        <ul>
+                          <li>⬜ Contribuir a proyectos de código abierto</li>
+                          <li>
+                            ⬜ Participación en foros y comunidades
+                            (StackOverflow, GitHub, Twitter)
+                          </li>
+                          <li>
+                            ⬜ Publicación de artículos o tutoriales sobre
+                            JavaScript
+                          </li>
+                        </ul>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+            </PaperList>
           </ol>
         </li>
       );
@@ -333,169 +542,205 @@ function IndiceTemas() {
     function CSS() {
       return (
         <li>
-          CSS (Estilos)
-          <ul>
-            <li>
-              ✅ Sintaxis de CSS: selectores, propiedades, Variables CSS y
-              valores.
-            </li>
-            <ul>
+          <Typography variant="h5">CSS (Estilos)</Typography>
+          <hr />
+          <br />
+          <ol>
+            <PaperList elevation={0}>
               <li>
-                🟡 Introducción:{" "}
-                <Link
-                  href="https://youtu.be/7OK045GLfLg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  underline="hover"
-                >
-                  Video (EP05)
-                </Link>
+                ✅ Sintaxis de CSS: selectores, propiedades, Variables CSS y
+                valores.
+                <ul>
+                  <li>
+                    🟡 Introducción:{" "}
+                    <Link
+                      href="https://youtu.be/7OK045GLfLg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      underline="hover"
+                    >
+                      Video (EP05)
+                    </Link>
+                  </li>
+                  <li>
+                    🟡 Variables <code>root</code>:{" "}
+                    <Link
+                      href="https://youtu.be/Ke2Bt7NVHyQ"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      underline="hover"
+                    >
+                      Video (EP06)
+                    </Link>
+                  </li>
+                </ul>
               </li>
               <li>
-                🟡 Variables <code>root</code>:{" "}
-                <Link
-                  href="https://youtu.be/Ke2Bt7NVHyQ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  underline="hover"
-                >
-                  Video (EP06)
-                </Link>
-              </li>
-            </ul>
-            <li>✅ Box model y posicionamiento.</li>
-            <ul>
-              <li>
-                🟡 <code>position: fixed;</code>{" "}
-                <Link
-                  href="https://youtu.be/VgJi2qnlT0Y"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  underline="hover"
-                >
-                  Video (EP07)
-                </Link>
-              </li>
-              <li>
-                🟡 Corrección de ejercicio{" "}
-                <Link
-                  href="https://youtu.be/JfpeoPIMst4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  underline="hover"
-                >
-                  Video (EP08)
-                </Link>
-              </li>
-              <li>
-                📝 Evaluación Realizada{" "}
-                <Link
-                  href="https://youtu.be/odPsMblWKKc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  underline="hover"
-                >
-                  Video (EP09)
-                </Link>
-                {" | "}
-                <Link
-                  href="https://jeff-aporta.github.io/manos-al-codigo-repo/?theme=00-css-basic&pub=trivia"
-                  rel="noopener noreferrer"
-                  underline="hover"
-                >
-                  Quizz App
-                </Link>
-              </li>
-              <li>
-                💪🏼 Ejercicios de position: absolute; y position: relative;
-              </li>
-              <ul>
-                <li>
-                  {(() => {
-                    const ejercicios = [];
-                    const len_ex = 15;
-                    for (let i = 1; i <= len_ex; i++) {
-                      ejercicios.push(<Ejercicio n={i} />);
-                      if (i != len_ex) {
-                        ejercicios.push(" | ");
-                      }
-                    }
-                    return ejercicios;
-                  })()}
-                </li>
-              </ul>
-              <ul>
-                <li>
-                  Videos:
+                <br />
+                <PaperList elevation={1}>
+                  <Typography variant="h6">✅ Posicionamiento.</Typography>
+                  <br />
                   <ul>
-                    {(() =>
-                      [
-                        [
-                          "EP10 | Propuesta",
-                          "https://youtu.be/kmFAUp7SwAs?si=BURWIlLOeE1st1A5",
-                        ],
-                        [
-                          "EP11 | Estrella tartésica | Ejercicio 4",
-                          "https://youtu.be/LGjkbsE6_5I?si=BGc1tLstz0-JUqd3",
-                        ],
-                        [
-                          "EP12 | 3 diseños | Ejercicios 3, 4 y 5",
-                          "https://youtu.be/9Wyf2yQCFgQ?si=EKfljKgeteapMaMk",
-                        ],
-                        [
-                          "EP13 | London Underground | Ejercicio 7",
-                          "https://youtu.be/ZfFNVlyti_4?si=6YanFPe6HAXZDqYv",
-                        ],
-                        [
-                          "EP14 | Instragram logo | Ejercicio 8",
-                          "https://youtu.be/pymesYfmeKc?si=l3wchriFCOcObOHC",
-                        ],
-                        [
-                          "EP15 | Yin Yang | Ejercicio 10",
-                          "https://youtu.be/jm0cU4AYjSo?si=GImO51o4RWguo69S",
-                        ],
-                        [
-                          "EP16 | Refactor 1",
-                          "https://youtu.be/sZnXEjxNExE?si=d3DwRmHSeB6hP3Kt",
-                        ],
-                        [
-                          "EP17 | Refactor 2",
-                          "https://youtu.be/iBYIySkpr40?si=bwepixldsIzfFOKl",
-                        ],
-                      ].map(([titulo, enlace]) => (
-                        <li>
-                          <Link
-                            href={enlace}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            underline="hover"
-                          >
-                            Video - {titulo}
-                          </Link>
-                        </li>
-                      )))()}
+                    <li>
+                      🟡 <code>position: fixed;</code>{" "}
+                      <Link
+                        href="https://youtu.be/VgJi2qnlT0Y"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        underline="hover"
+                      >
+                        Video (EP07)
+                      </Link>
+                    </li>
+                    <li>
+                      🟡 Corrección de ejercicio{" "}
+                      <Link
+                        href="https://youtu.be/JfpeoPIMst4"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        underline="hover"
+                      >
+                        Video (EP08)
+                      </Link>
+                    </li>
+                    <li>
+                      📝 Evaluación Realizada{" "}
+                      <Link
+                        href="https://youtu.be/odPsMblWKKc"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        underline="hover"
+                      >
+                        Video (EP09)
+                      </Link>
+                      {" | "}
+                      <Link
+                        href="https://jeff-aporta.github.io/manos-al-codigo-repo/?theme=00-css-basic&pub=trivia"
+                        rel="noopener noreferrer"
+                        underline="hover"
+                        target="_blank"
+                      >
+                        <b>Quizz App</b>
+                      </Link>
+                    </li>
+                    <li>
+                      <PaperList elevation={0}>
+                        <b>
+                          <div className="d-flex jc-sb fw-wrap ai-center">
+                            <big>
+                              💪🏼 Ejercicios de position: absolute; y position:
+                              relative;
+                            </big>
+                            <big>
+                              (
+                              <Link
+                                href={generar_URL(
+                                  {
+                                    pub: "desafios-de-diseño-css",
+                                  },
+                                  false
+                                )}
+                                target="_blank"
+                                underline="hover"
+                              >
+                                Ver todos
+                              </Link>
+                              )
+                            </big>
+                          </div>
+                        </b>
+                        <hr />
+                        <br />
+                        <div>
+                          {(() => {
+                            const ejercicios = [];
+                            const len_ex = 15;
+                            for (let i = 1; i <= len_ex; i++) {
+                              ejercicios.push(<Ejercicio n={i} />);
+                              if (i != len_ex) {
+                                ejercicios.push(" | ");
+                              }
+                            }
+                            return ejercicios;
+                          })()}
+                        </div>
+                        <br />
+                        <b>Videos:</b>
+                        <br />
+                        <br />
+                        {(() =>
+                          [
+                            [
+                              "EP10 | Propuesta",
+                              "https://youtu.be/kmFAUp7SwAs?si=BURWIlLOeE1st1A5",
+                            ],
+                            [
+                              "EP11 | Estrella tartésica | Ejercicio 4",
+                              "https://youtu.be/LGjkbsE6_5I?si=BGc1tLstz0-JUqd3",
+                            ],
+                            [
+                              "EP12 | 3 diseños | Ejercicios 3, 4 y 5",
+                              "https://youtu.be/9Wyf2yQCFgQ?si=EKfljKgeteapMaMk",
+                            ],
+                            [
+                              "EP13 | London Underground | Ejercicio 7",
+                              "https://youtu.be/ZfFNVlyti_4?si=6YanFPe6HAXZDqYv",
+                            ],
+                            [
+                              "EP14 | Instragram logo | Ejercicio 8",
+                              "https://youtu.be/pymesYfmeKc?si=l3wchriFCOcObOHC",
+                            ],
+                            [
+                              "EP15 | Yin Yang | Ejercicio 10",
+                              "https://youtu.be/jm0cU4AYjSo?si=GImO51o4RWguo69S",
+                            ],
+                            [
+                              "EP16 | Refactor 1",
+                              "https://youtu.be/sZnXEjxNExE?si=d3DwRmHSeB6hP3Kt",
+                            ],
+                            [
+                              "EP17 | Refactor 2",
+                              "https://youtu.be/iBYIySkpr40?si=bwepixldsIzfFOKl",
+                            ],
+                          ].map(([titulo, enlace]) => (
+                            <_>
+                              <Link
+                                href={enlace}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                underline="hover"
+                              >
+                                Video - {titulo}
+                              </Link>
+                              <br />
+                            </_>
+                          )))()}
+                      </PaperList>
+                    </li>
                   </ul>
-                </li>
-              </ul>
-            </ul>
-            <li>✅ Introducción a Flexbox y Grid.</li>
-            <li>
-              ⬜ Diseño responsivo (media queries).
-              <ul>
-                <li>
-                  Introducción a{" "}
-                  <Link
-                    href="https://jeff-aporta.github.io/fluid-css/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    underline="hover"
-                  >
-                    fluidCSS.js
-                  </Link>
-                </li>
-              </ul>
-            </li>
-          </ul>
+                </PaperList>
+              </li>
+              <br />
+
+              <li>✅ Introducción a Flexbox y Grid.</li>
+              <li>
+                ⬜ Diseño responsivo (media queries).
+                <ul>
+                  <li>
+                    Introducción a{" "}
+                    <Link
+                      href="https://jeff-aporta.github.io/fluid-css/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      underline="hover"
+                    >
+                      fluidCSS.js
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            </PaperList>
+          </ol>
         </li>
       );
 
@@ -521,52 +766,56 @@ function IndiceTemas() {
     function HTML() {
       return (
         <li>
-          HTML (Estructura)
-          <ul>
-            <li>
-              ✅ Conocer las etiquetas básicas: <code>html</code>,{" "}
-              <code>head</code>, <code>body</code>, <code>div</code>,{" "}
-              <code>span</code>.
-            </li>
-            <li>
-              ✅ Atributos HTML <code>id</code>, <code>class</code>,{" "}
-              <code>style</code> y otros.{" "}
-              <Link
-                href="https://youtu.be/FSZgU1kTCN0"
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-              >
-                Video (EP02)
-              </Link>
-            </li>
-            <li>
-              ✅ Etiquetas semánticas.{" "}
-              <Link
-                href="https://youtu.be/_cpTJ8lLRFo"
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-              >
-                Video (EP03)
-              </Link>
-            </li>
-            <li>
-              ✅ Recomendaciones de accesibilidad para motores de búsqueda y
-              dev-team.
-            </li>
-            <li>
-              📝 Evaluación Realizada{" "}
-              <Link
-                href="https://youtu.be/BJW_Z9wZlz8"
-                target="_blank"
-                rel="noopener noreferrer"
-                underline="hover"
-              >
-                Video (EP04)
-              </Link>
-            </li>
-          </ul>
+          <Typography variant="h5">HTML (Estructura)</Typography>
+          <hr />
+          <br />
+          <ol>
+            <PaperList elevation={0}>
+              <li>
+                ✅ Conocer las etiquetas básicas: <code>html</code>,{" "}
+                <code>head</code>, <code>body</code>, <code>div</code>,{" "}
+                <code>span</code>.
+              </li>
+              <li>
+                ✅ Atributos HTML <code>id</code>, <code>class</code>,{" "}
+                <code>style</code> y otros.{" "}
+                <Link
+                  href="https://youtu.be/FSZgU1kTCN0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  underline="hover"
+                >
+                  Video (EP02)
+                </Link>
+              </li>
+              <li>
+                ✅ Etiquetas semánticas.{" "}
+                <Link
+                  href="https://youtu.be/_cpTJ8lLRFo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  underline="hover"
+                >
+                  Video (EP03)
+                </Link>
+              </li>
+              <li>
+                ✅ Recomendaciones de accesibilidad para motores de búsqueda y
+                dev-team.
+              </li>
+              <li>
+                📝 Evaluación Realizada{" "}
+                <Link
+                  href="https://youtu.be/BJW_Z9wZlz8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  underline="hover"
+                >
+                  Video (EP04)
+                </Link>
+              </li>
+            </PaperList>
+          </ol>
         </li>
       );
     }
@@ -574,7 +823,7 @@ function IndiceTemas() {
   function FrontendDeveloper() {
     return (
       <li>
-        Desarrollo Frontend Moderno
+        <Typography variant="h4">Desarrollo Frontend Moderno</Typography>
         <ol>
           <li>
             Git y GitHub (Software en general)
@@ -1005,7 +1254,7 @@ function IndiceTemas() {
   function BackendDeveloper() {
     return (
       <li>
-        Desarrollo Backend
+        <Typography variant="h4">Desarrollo Backend</Typography>
         <ol>
           <li>
             Introducción al Backend

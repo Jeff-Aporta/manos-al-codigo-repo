@@ -15,12 +15,12 @@ function Header() {
   return (
     <div
       style={{
-        background: "black",
+        background: "rgba(0,0,0,0.3)",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         fontSize: "150%",
-        borderBottom: "1px solid steelblue",
+        borderBottom: "1px solid rgba(70, 130, 180, 0.5)",
       }}
     >
       <Tooltip title="Bienvenida" placement="right">
@@ -34,6 +34,7 @@ function Header() {
           color="inherit"
           underline="none"
           className="bright-hover-2"
+          rel="noopener noreferrer"
         >
           <div
             style={{
@@ -44,7 +45,15 @@ function Header() {
             }}
           >
             <img src="src/img/logo_128x128.png" height="50" alt="" />
-            Manos al código
+            <span
+              className={fluidCSS()
+                .ltX(500, {
+                  display: "none",
+                })
+                .end()}
+            >
+              Manos al código
+            </span>
           </div>
         </Link>
       </Tooltip>
@@ -71,5 +80,17 @@ function Header() {
         </div>
       </div>
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <Paper
+      elevation={0}
+      className="pad-20px d-flex jc-end ai-end fs-150p"
+      style={{ height: "400px" }}
+    >
+      Manos al código.
+    </Paper>
   );
 }

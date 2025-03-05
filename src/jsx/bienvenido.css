@@ -1,15 +1,21 @@
-/* ================================================
-   Numeración Automática hasta Nivel 10 (CSS Nesting)
-   ================================================ */
+ol {
+  padding-left: 10px;
+}
+
+ul {
+  padding-left: 20px;
+}
 
 .contador {
   counter-reset: lvl1; /* Inicia el contador de nivel 1 */
   font-size: smaller;
+  padding-left: 0px;
 
   li::before {
     color: skyblue;
   }
 
+  > div > li,
   > li {
     list-style-type: none;
     counter-increment: lvl1;
@@ -23,7 +29,9 @@
     > ol,
     > ul {
       counter-reset: lvl2; /* Prepara contador de nivel 2 */
+      padding-left: 0;
 
+      div > li,
       > li {
         list-style-type: none;
         counter-increment: lvl2;
@@ -34,10 +42,13 @@
           font-weight: bold;
         }
 
+        div > ul,
+        div > ol,
         > ol,
         > ul {
           counter-reset: lvl3; /* Prepara contador de nivel 3 */
 
+          div > li,
           > li {
             list-style-type: none;
             counter-increment: lvl3;
@@ -51,7 +62,9 @@
             > ol,
             > ul {
               counter-reset: lvl4; /* Nivel 4 */
+              padding-left: 10px;
 
+              div > li,
               > li {
                 list-style-type: none;
                 counter-increment: lvl4;
@@ -66,7 +79,9 @@
                 > ol,
                 > ul {
                   counter-reset: lvl5; /* Nivel 5 */
+                  padding-left: 10px;
 
+                  div > li,
                   > li {
                     list-style-type: none;
                     counter-increment: lvl5;
@@ -81,7 +96,9 @@
                     > ol,
                     > ul {
                       counter-reset: lvl6; /* Nivel 6 */
+                      padding-left: 10px;
 
+                      div > li,
                       > li {
                         list-style-type: none;
                         counter-increment: lvl6;
@@ -98,6 +115,7 @@
                         > ul {
                           counter-reset: lvl7; /* Nivel 7 */
 
+                          div > li,
                           > li {
                             list-style-type: none;
                             counter-increment: lvl7;
@@ -115,6 +133,7 @@
                             > ul {
                               counter-reset: lvl8; /* Nivel 8 */
 
+                              div > li,
                               > li {
                                 list-style-type: none;
                                 counter-increment: lvl8;
@@ -132,6 +151,7 @@
                                 > ul {
                                   counter-reset: lvl9; /* Nivel 9 */
 
+                                  div > li,
                                   > li {
                                     list-style-type: none;
                                     counter-increment: lvl9;
