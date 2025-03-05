@@ -616,9 +616,7 @@ function IndiceTemas() {
                       {" | "}
                       <Link
                         href="https://jeff-aporta.github.io/manos-al-codigo-repo/?theme=00-css-basic&pub=trivia"
-                        rel="noopener noreferrer"
                         underline="hover"
-                        target="_blank"
                       >
                         <b>Quizz App</b>
                       </Link>
