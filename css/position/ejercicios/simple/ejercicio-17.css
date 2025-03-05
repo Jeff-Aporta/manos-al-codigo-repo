@@ -1,0 +1,59 @@
+body {
+  /* Con respecto al 10, este es el único cambio */
+  background: radial-gradient(circle at center, rgb(0, 54, 107), black 70%);
+}
+
+.diseño#ejercicio-17 {
+  .matriz {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: -20px;
+    font-size: 130%;
+    color: black;
+    mix-blend-mode: overlay;
+    .capa {
+      position: static;
+      width: fit-content;
+      height: fit-content;
+    }
+    .renglon {
+      position: relative;
+      
+      display: flex;
+      gap: 10px;
+
+      &#renglon-1 {
+        left: -5px;
+      }
+
+      &#renglon-2 {
+        top: -10px;
+        left: 5px;
+      }
+    }
+  }
+  .naranja {
+    border: 7px solid orangered;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 255, 255, 0.7) 10px,
+        rgba(255, 255, 255, 0.4) 20px,
+        transparent 20px
+      ),
+      radial-gradient(
+        circle at 35% 35%,
+        rgba(255, 255, 255, 0.7) 5px,
+        rgba(255, 255, 255, 0.4) 10px,
+        transparent 10px
+      ),
+      radial-gradient(
+        circle at 40% 40%,
+        orange,
+        orangered 55%,
+        darkorange 57%,
+        Tomato 70%
+      );
+  }
+}

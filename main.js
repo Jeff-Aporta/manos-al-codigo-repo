@@ -6,6 +6,13 @@ const pub_estructura = {
   "desafios-de-diseno-css": {
     root: "css/position",
     tree: (root, node) => {
+      asciiMap
+        .tree(
+          "https://cdn.jsdelivr.net/gh/paulirish/lite-youtube-embed@master/src/"
+        )
+        .js("lite-yt-embed")
+        .css("lite-yt-embed")
+        .writehtml();
       asciiMap.CLI.myUI().playground();
     },
   },
@@ -34,8 +41,8 @@ const pub_estructura = {
 
 var rootfolder = getPub().root; // identificador de carpeta raíz de lo que se desea cargar.
 
-function getPub(){
-  return pub_estructura[pubid_ajustada(pub)]
+function getPub() {
+  return pub_estructura[pubid_ajustada(pub)];
 }
 
 function recargar_actualizando_parametros() {

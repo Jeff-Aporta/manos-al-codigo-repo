@@ -1,37 +1,4 @@
-JS2CSS.insertStyle({
-  id: "body-multicolor",
-  objJs: {
-    ".app": {
-      background: `${(() => {
-        let str = [];
-        const tono_inicial = 240;
-        const iteraciones = 5;
-        const saltos_entre_angulos = 30;
-        const radio = 800;
-        const desface_y = 300;
-        for (let i = 0; i < iteraciones; i++) {
-          str.push(`radial-gradient(
-            circle at ${i % 2 == 1 ? "90%" : "10%"} ${i * 1500 - desface_y}px,
-            hsla(${tono_inicial + i * saltos_entre_angulos}, 100%, 50%, 0.3),
-            transparent ${radio}px
-          )`);
-        }
-        for (let i = 0; i < iteraciones; i++) {
-          str.push(`radial-gradient(
-          circle at ${i % 2 == 0 ? "90%" : "10%"} ${i * 1300 + desface_y}px,
-          hsla(${
-            tono_inicial + i * saltos_entre_angulos - 2 * saltos_entre_angulos
-          }, 100%, 50%, 0.3),
-          transparent ${radio}px
-        )`);
-        }
-        str = str.join(",");
-        console.log(str);
-        return str;
-      })()}`,
-    },
-  },
-});
+iniciarBGApp_1_radialGrads();
 
 function App() {
   return (
@@ -62,7 +29,8 @@ function App() {
         <Typography variant="h2">
           <b>
             Proyecto educativo{" "}
-            <span style={{ color: "RoyalBlue" }}>En línea</span>
+            <span style={{ color: "RoyalBlue" }}>en línea</span>{" "}
+            <i className="fa-solid fa-podcast" />
           </b>
         </Typography>
         <br />
@@ -92,7 +60,8 @@ function App() {
             })
             .end()}
         >
-          Es gratis <i className="fa-solid fa-thumbs-up" />
+          ES GRATIS&nbsp;&nbsp;&nbsp;&nbsp;
+          <i className="fa-solid fa-thumbs-up" style={{ opacity: 0.4 }} />
         </Typography>
         <br />
         <BotonesUnirse />
@@ -179,20 +148,6 @@ function PaperList(props) {
           padding: [5, 20],
         })
         .end()}
-    />
-  );
-}
-
-function PaperBody(props) {
-  return (
-    <Paper
-      {...props}
-      className={fluidCSS()
-        .lerpX(320, 500, {
-          margin: [0, 20],
-          padding: [10, 20],
-        })
-        .end(props.className)}
     />
   );
 }

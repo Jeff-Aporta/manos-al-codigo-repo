@@ -278,20 +278,6 @@ function App() {
                   </_>
                 ),
               },
-              {
-                filename: "ejercicio-17",
-                titulo: `Esfera de Goku`,
-                descripcion: (
-                  <_>
-                    Este ejercicio se centra en la reproducción de la esfera de
-                    4 estrellas, la que fue dejada a Goku por su abuelo. hay que
-                    recrear fielmente el diseño y la estética de Dragon Ball. El
-                    reto invita a explorar conceptos de efectos visuales,
-                    demostrando cómo, mediante código es posible crear elementos
-                    de gran detalle y precisión.
-                  </_>
-                ),
-              },
             ],
             carpeta_ejercicio("simple")
           );
@@ -579,14 +565,13 @@ function PresentacionPlayground({
           const params = new URLSearchParams(window.location.search);
           params.set("pub", pubid_ajustada(params.get("pub")));
           if (playground_id == nombre_proyecto) {
+            params.delete("playground-id");
+            const url_delete = `${
+              window.location.pathname
+            }?${params.toString()}`;
             return (
               <Tooltip title="Remover selección">
-                <IconButton
-                  style={{ color: "RosyBrown" }}
-                  href={generar_URL({
-                    "playground-id": "",
-                  })}
-                >
+                <IconButton style={{ color: "RosyBrown" }} href={url_delete}>
                   <i className="fa-solid fa-filter-circle-xmark"></i>
                 </IconButton>
               </Tooltip>

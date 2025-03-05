@@ -35,9 +35,14 @@
 }
 
 .miniatura-youtube {
-  border-radius: 15px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 hr{
   opacity: 0.2;
+}
+
+code{
+  color: plum;
 }

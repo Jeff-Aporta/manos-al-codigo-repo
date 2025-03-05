@@ -94,3 +94,68 @@ function Footer() {
     </Paper>
   );
 }
+
+function PaperBody(props) {
+  return (
+    <Paper
+      {...props}
+      className={fluidCSS()
+        .lerpX(320, 500, {
+          margin: [0, 20],
+          padding: [10, 20],
+        })
+        .end(props.className)}
+    />
+  );
+}
+
+function DivBody(props) {
+  return (
+    <div
+      {...props}
+      className={fluidCSS()
+        .lerpX(320, 500, {
+          margin: [0, 20],
+        })
+        .end(props.className)}
+    />
+  );
+}
+
+function iniciarBGApp_1_radialGrads({
+  query = ".app",
+  str = [],
+  tono_inicial = 240,
+  iteraciones = 2,
+  saltos_entre_angulos = 30,
+  radio = 800,
+  desface_y = 300,
+} = {}) {
+  JS2CSS.insertStyle({
+    id: "body-multicolor",
+    objJs: {
+      [query]: {
+        background: `${(() => {
+          for (let i = 0; i < iteraciones; i++) {
+            str.push(`radial-gradient(
+              circle at ${i % 2 == 1 ? "90%" : "10%"} ${i * 1500 - desface_y}px,
+              hsla(${tono_inicial + i * saltos_entre_angulos}, 100%, 50%, 0.3),
+              transparent ${radio}px
+            )`);
+          }
+          for (let i = 0; i < iteraciones; i++) {
+            str.push(`radial-gradient(
+            circle at ${i % 2 == 0 ? "90%" : "10%"} ${i * 1300 + desface_y}px,
+            hsla(${
+              tono_inicial + i * saltos_entre_angulos - 2 * saltos_entre_angulos
+            }, 100%, 50%, 0.2),
+            transparent ${radio}px
+          )`);
+          }
+          str = str.join(",");
+          return str;
+        })()}`,
+      },
+    },
+  });
+}
