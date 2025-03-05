@@ -640,7 +640,6 @@ function IndiceTemas() {
                                   },
                                   false
                                 )}
-                                target="_blank"
                                 underline="hover"
                               >
                                 Ver todos
